@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intermediate", "Intermediate", "{C9DB09F9-A56F-4943-900C-9E0FD391D851}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{65C92EB5-1B15-4674-BA6A-DAFF339AA6DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildRulesProjects", "BuildRulesProjects", "{530DC94A-CC41-4CB6-BE32-5403C322C32A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThirdPersonShootingModuleRules", "Intermediate\Build\BuildRulesProjects\ThirdPersonShootingModuleRules\ThirdPersonShootingModuleRules.csproj", "{BB8331DD-09D7-41FF-B0C2-F31CA64484A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB8331DD-09D7-41FF-B0C2-F31CA64484A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB8331DD-09D7-41FF-B0C2-F31CA64484A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB8331DD-09D7-41FF-B0C2-F31CA64484A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB8331DD-09D7-41FF-B0C2-F31CA64484A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{65C92EB5-1B15-4674-BA6A-DAFF339AA6DB} = {C9DB09F9-A56F-4943-900C-9E0FD391D851}
+		{530DC94A-CC41-4CB6-BE32-5403C322C32A} = {65C92EB5-1B15-4674-BA6A-DAFF339AA6DB}
+		{BB8331DD-09D7-41FF-B0C2-F31CA64484A9} = {530DC94A-CC41-4CB6-BE32-5403C322C32A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7CAC0D0C-73C4-4CAB-910E-D0938D303432}
+	EndGlobalSection
+EndGlobal
