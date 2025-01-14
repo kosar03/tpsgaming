@@ -28,6 +28,10 @@ void AShooterCharacter::BeginPlay()
 	UWorld* World = GetWorld();
 	Gun = World->SpawnActor<AGun>(GunClass);
 	
+	GetMesh()->HideBoneByName(TEXT("weapon_r"), EPhysBodyOp::PBO_None);
+	// GetMesh()->UnHideBoneByName(TEXT("weapon_r"));
+	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
+	Gun->SetOwner(this);
 }
 
 // Called every frame
