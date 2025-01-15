@@ -6,7 +6,6 @@
 #include "Camera/CameraComponent.h"
 #include "Weapons/Gun.h"
 
-
 // Sets default values
 AShooterCharacter::AShooterCharacter()
 {
@@ -66,6 +65,10 @@ void AShooterCharacter::ShooterJump()
 	Super::Jump();
 }
 
+void AShooterCharacter::Shoot()
+{
+	Gun->PullTrigger();
+}
 
 // Called to bind functionality to input
 void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -77,5 +80,6 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &AShooterCharacter::LookUp);
 
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &AShooterCharacter::ShooterJump);
+	PlayerInputComponent->BindAction(TEXT("Shoot"), EInputEvent::IE_Pressed, this, &AShooterCharacter::Shoot);
 }
 
