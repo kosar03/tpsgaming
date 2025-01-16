@@ -6,6 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "Weapons/Gun.h"
 
+
 // Sets default values
 AShooterCharacter::AShooterCharacter()
 {
@@ -23,6 +24,8 @@ AShooterCharacter::AShooterCharacter()
 void AShooterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	Health = MaxHealth;
 
 	UWorld* World = GetWorld();
 	Gun = World->SpawnActor<AGun>(GunClass);
@@ -83,3 +86,13 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAction(TEXT("Shoot"), EInputEvent::IE_Pressed, this, &AShooterCharacter::Shoot);
 }
 
+float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const &DamageEvent, AController *EventInstigator, AActor *DamageCauser)
+{
+    float DamageToApply = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+	DamageToApply = FMath::Min(Health, DamageToApply);
+	Health -= DamageToApply * PhysicalShield;
+	UE_LOG(LogTemp, Warning, TEXT("HP decrease!, left %f"), Health);
+
+	return DamageToApply;
+
+}
