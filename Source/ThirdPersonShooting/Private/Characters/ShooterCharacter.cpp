@@ -7,6 +7,7 @@
 #include "Weapons/Gun.h"
 
 
+
 // Sets default values
 AShooterCharacter::AShooterCharacter()
 {
@@ -95,4 +96,9 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const &Dama
 
 	return DamageToApply;
 
+}
+
+bool AShooterCharacter::IsDead()
+{
+    return Health <= 0.f;
 }
