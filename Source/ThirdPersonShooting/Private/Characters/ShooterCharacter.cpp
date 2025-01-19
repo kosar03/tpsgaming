@@ -7,7 +7,6 @@
 #include "Weapons/Gun.h"
 
 
-
 // Sets default values
 AShooterCharacter::AShooterCharacter()
 {

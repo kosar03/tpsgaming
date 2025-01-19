@@ -26,5 +26,10 @@ protected:
 private:
 	APawn* PlayerPawn;
 
+	// 靠近半径（厘米）。
+	UPROPERTY(EditAnywhere)
+	float AcceptanceRadius = 300.f;
 
+	UPROPERTY(EditAnywhere)
+	class UBehaviorTree* AIBehaviorTree; 
 };

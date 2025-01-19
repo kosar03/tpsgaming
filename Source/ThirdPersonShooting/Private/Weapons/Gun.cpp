@@ -41,7 +41,8 @@ void AGun::PullTrigger()
 
 	FHitResult OutHit;
 	bool bHit = GetWorld()->LineTraceSingleByChannel(OutHit, StartLocation, EndLocation, ECollisionChannel::ECC_GameTraceChannel1);
-	if (bHit) {
+	if (bHit) 
+	{
 		// DrawDebugPoint(GetWorld(), OutHit.Location, 20.f, FColor::Red, true);
 
 		// 射击方向，故取负值。
