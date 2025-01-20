@@ -52,7 +52,6 @@ public:
 	UFUNCTION(BlueprintPure)
 	bool IsDead();
 
-private:
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
 	void LookUp(float AxisValue);
@@ -60,4 +59,7 @@ private:
 
 	void ShooterJump();
 	void Shoot();
+
+private:
+
 };

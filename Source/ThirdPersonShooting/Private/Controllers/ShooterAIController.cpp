@@ -8,29 +8,6 @@ void AShooterAIController::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if (PlayerPawn)
-    {
-        if (LineOfSightTo(PlayerPawn))
-        {
-            // 以下采用行为树实现，故注释掉。
-            // SetFocus(PlayerPawn);
-            // 移动到玩家3米。
-            // MoveToActor(PlayerPawn, AcceptanceRadius);
-
-            // 行为树。
-            GetBlackboardComponent()->SetValueAsVector(TEXT("PlayerLocation"), PlayerPawn->GetActorLocation()); // 给黑板键设置值，是条件满足。
-            GetBlackboardComponent()->SetValueAsVector(TEXT("LastKnownPlayerLocation"), PlayerPawn->GetActorLocation());
-        }
-        else
-        {   // 以下采用行为树实现，故注释掉。
-            // ClearFocus(EAIFocusPriority::Gameplay);
-            // StopMovement();
-            
-            // 行为树。
-            GetBlackboardComponent()->ClearValue(TEXT("PlayerLocation")); // 给黑板键取消设置值，使条件不满足。
-
-        }
-    }
 }
 
 void AShooterAIController::BeginPlay()

@@ -40,7 +40,10 @@ void AGun::PullTrigger()
 	FVector EndLocation = StartLocation + StartRotation.Vector() * MaxRange;
 
 	FHitResult OutHit;
-	bool bHit = GetWorld()->LineTraceSingleByChannel(OutHit, StartLocation, EndLocation, ECollisionChannel::ECC_GameTraceChannel1);
+	FCollisionQueryParams Params;
+	Params.AddIgnoredActor(this);
+	Params.AddIgnoredActor(OwnerPawn);
+	bool bHit = GetWorld()->LineTraceSingleByChannel(OutHit, StartLocation, EndLocation, ECollisionChannel::ECC_GameTraceChannel1, Params);
 	if (bHit) 
 	{
 		// DrawDebugPoint(GetWorld(), OutHit.Location, 20.f, FColor::Red, true);
