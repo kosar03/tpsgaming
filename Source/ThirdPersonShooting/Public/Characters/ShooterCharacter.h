@@ -52,6 +52,9 @@ public:
 	UFUNCTION(BlueprintPure)
 	bool IsDead();
 
+	UFUNCTION(BlueprintPure)
+	float GetHealthPercent() const;
+
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
 	void LookUp(float AxisValue);

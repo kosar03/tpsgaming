@@ -21,6 +21,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+private:
+	bool GunTrace(FHitResult& HitResult, FVector& ShotDirection);
+
+	AController* GetOwnerController() const;
 
 public:	
 	// Called every frame
@@ -38,6 +42,12 @@ private:
 
 	UPROPERTY(EditAnywhere);
 	class UParticleSystem* ImpactEffect;
+
+	UPROPERTY(EditAnywhere)
+	class USoundBase* MuzzleSound;
+
+	UPROPERTY(EditAnywhere)
+	class USoundBase* ImpactSound;
 
 	UPROPERTY(EditAnywhere)
 	float MaxRange = 10000;

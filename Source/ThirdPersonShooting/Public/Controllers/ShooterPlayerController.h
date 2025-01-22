@@ -23,6 +23,7 @@ public:
 
 
 protected:
+	virtual void BeginPlay() override;
 
 private:
 
@@ -34,6 +35,15 @@ protected:
 private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UUserWidget> LoseScreenClass; 
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UUserWidget> WinScreenClass; 
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UUserWidget> HUDClass;
+
+	UPROPERTY()
+	UUserWidget* HUD;
 
 	// 单位：秒。
 	UPROPERTY(EditAnywhere)

@@ -9,6 +9,7 @@
 #include "Engine/DamageEvents.h"
 
 
+
 // Sets default values
 AGun::AGun()
 {
@@ -26,36 +27,21 @@ AGun::AGun()
 void AGun::PullTrigger()
 {
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, SkeletalMesh, TEXT("MuzzleFlashSocket"));
-
-	APawn* OwnerPawn = Cast<APawn>(GetOwner());
-	if (!OwnerPawn) return ;
-	
-	AController* OwnerController = OwnerPawn->GetController();
-	if (!OwnerController) return ;
-
-	FVector StartLocation;
-	FRotator StartRotation;
-	OwnerController->GetPlayerViewPoint(StartLocation, StartRotation);
-	// DrawDebugCamera(GetWorld(), StartLocation, StartRotation, 120, 2, FColor::Red, true);
-	FVector EndLocation = StartLocation + StartRotation.Vector() * MaxRange;
+	UGameplayStatics::SpawnSoundAttached(MuzzleSound, SkeletalMesh, TEXT("MuzzleFlashSocket"));
 
 	FHitResult OutHit;
-	FCollisionQueryParams Params;
-	Params.AddIgnoredActor(this);
-	Params.AddIgnoredActor(OwnerPawn);
-	bool bHit = GetWorld()->LineTraceSingleByChannel(OutHit, StartLocation, EndLocation, ECollisionChannel::ECC_GameTraceChannel1, Params);
+	FVector ShotDirection;
+	bool bHit = GunTrace(OutHit, ShotDirection);
 	if (bHit) 
 	{
 		// DrawDebugPoint(GetWorld(), OutHit.Location, 20.f, FColor::Red, true);
-
-		// 射击方向，故取负值。
-		FVector ShotDirection = -StartRotation.Vector();
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, OutHit.Location, ShotDirection.Rotation());
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(), ImpactSound, OutHit.Location);
 
 		AActor* HitActor = OutHit.GetActor();
 		if (HitActor) {
 			FPointDamageEvent PointDamageEvent(Damage, OutHit, ShotDirection, nullptr);
-			HitActor->TakeDamage(Damage, PointDamageEvent, OwnerController, this);
+			HitActor->TakeDamage(Damage, PointDamageEvent, GetOwnerController(), this);
 		}
 
 	}
@@ -69,6 +55,39 @@ void AGun::BeginPlay()
 	Super::BeginPlay();
 
 	
+}
+
+bool AGun::GunTrace(FHitResult &HitResult, FVector& ShotDirection)
+{	
+	AController* OwnerController = GetOwnerController();
+	if (!OwnerController) {
+		return false;
+	}
+
+	FVector StartLocation;
+	FRotator StartRotation;
+	OwnerController->GetPlayerViewPoint(StartLocation, StartRotation);
+	// DrawDebugCamera(GetWorld(), StartLocation, StartRotation, 120, 2, FColor::Red, true);
+	FVector EndLocation = StartLocation + StartRotation.Vector() * MaxRange;
+	// 射击方向，故取负值。
+	ShotDirection = -StartRotation.Vector();
+
+	FCollisionQueryParams Params;
+	Params.AddIgnoredActor(this);
+	Params.AddIgnoredActor(GetOwner());
+	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECollisionChannel::ECC_GameTraceChannel1, Params);
+
+	return bHit; 
+}
+
+AController *AGun::GetOwnerController() const
+{
+    APawn* OwnerPawn = Cast<APawn>(GetOwner());
+	if (!OwnerPawn) {
+		return nullptr;
+	}
+	
+	return OwnerPawn->GetController();
 }
 
 // Called every frame

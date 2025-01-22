@@ -7,6 +7,7 @@
 #include "Components/CapsuleComponent.h"
 #include "GameModes/ShootingGameModeBase.h"
 
+
 // Sets default values
 AShooterCharacter::AShooterCharacter()
 {
@@ -110,4 +111,9 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const &Dama
 bool AShooterCharacter::IsDead()
 {
 	return Health <= 0.f;
+}
+
+float AShooterCharacter::GetHealthPercent() const
+{
+    return Health / MaxHealth;
 }
