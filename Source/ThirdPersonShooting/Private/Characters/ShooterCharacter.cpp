@@ -8,6 +8,7 @@
 #include "GameModes/ShootingGameModeBase.h"
 
 
+
 // Sets default values
 AShooterCharacter::AShooterCharacter()
 {
@@ -73,7 +74,12 @@ void AShooterCharacter::Shoot()
 	Gun->PullTrigger();
 }
 
-// Called to bind functionality to input
+void AShooterCharacter::ShooterCrouch()
+{
+	Super::Crouch(false);
+}
+
+ // Called to bind functionality to input
 void AShooterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -83,6 +89,7 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCo
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &AShooterCharacter::LookUp);
 
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &AShooterCharacter::ShooterJump);
+	PlayerInputComponent->BindAction(TEXT("Crouch"), EInputEvent::IE_Pressed, this, &AShooterCharacter::ShooterCrouch);
 	PlayerInputComponent->BindAction(TEXT("Shoot"), EInputEvent::IE_Pressed, this, &AShooterCharacter::Shoot);
 }
 

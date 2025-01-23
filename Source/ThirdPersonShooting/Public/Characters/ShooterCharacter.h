@@ -62,6 +62,7 @@ public:
 
 	void ShooterJump();
 	void Shoot();
+	void ShooterCrouch();
 
 private:
 
