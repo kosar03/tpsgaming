@@ -9,6 +9,7 @@
 
 
 
+
 // Sets default values
 AShooterCharacter::AShooterCharacter()
 {
@@ -30,12 +31,14 @@ void AShooterCharacter::BeginPlay()
 	Health = MaxHealth;
 
 	UWorld *World = GetWorld();
-	Gun = World->SpawnActor<AGun>(GunClass);
+	BasicGun = World->SpawnActor<AGun>(GunClass);
+	EquippedGuns.Add(BasicGun);
+	WeaponIndex = 0;
 
 	GetMesh()->HideBoneByName(TEXT("weapon_r"), EPhysBodyOp::PBO_None);
 	// GetMesh()->UnHideBoneByName(TEXT("weapon_r"));
-	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
-	Gun->SetOwner(this);
+	BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
+	BasicGun->SetOwner(this);
 }
 
 // Called every frame
@@ -71,12 +74,65 @@ void AShooterCharacter::ShooterJump()
 
 void AShooterCharacter::Shoot()
 {
-	Gun->PullTrigger();
+	if (BasicGun)
+	{
+		BasicGun->PullTrigger();
+	}
 }
 
 void AShooterCharacter::ShooterCrouch()
 {
 	Super::Crouch(false);
+}
+
+void AShooterCharacter::WeaponSwitchLast()
+{
+	if (WeaponIndex == 0) 
+	{
+		WeaponIndex = EquippedGuns.Num() - 1;
+	}
+	else 
+	{
+		--WeaponIndex;
+	}
+	UE_LOG(LogTemp, Warning, TEXT("切换下一武器。"));
+} 
+
+void AShooterCharacter::WeaponSwitchNext()
+{
+	WeaponIndex = (WeaponIndex + 1) % EquippedGuns.Num();
+	UE_LOG(LogTemp, Warning, TEXT("切换上一武器。"));
+}
+
+void AShooterCharacter::Equip()
+{
+	if (OverlapGun)
+	{
+		BasicGun->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		UE_LOG(LogTemp, Warning, TEXT("卸下Gun！"));
+		BasicGun = OverlapGun;
+		BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
+		BasicGun->SetOwner(this);
+		EquippedGuns.Add(BasicGun);
+		OverlapGun = nullptr;
+	}
+	
+
+}
+
+void AShooterCharacter::SetOverlapGun(AGun* NewOverlapGun)
+{
+	OverlapGun = NewOverlapGun;
+}
+
+void AShooterCharacter::ClearOverlapGun()
+{
+	OverlapGun = nullptr;	
+}
+
+float AShooterCharacter::GetHealth()
+{
+	return Health;
 }
 
  // Called to bind functionality to input
@@ -91,6 +147,10 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCo
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &AShooterCharacter::ShooterJump);
 	PlayerInputComponent->BindAction(TEXT("Crouch"), EInputEvent::IE_Pressed, this, &AShooterCharacter::ShooterCrouch);
 	PlayerInputComponent->BindAction(TEXT("Shoot"), EInputEvent::IE_Pressed, this, &AShooterCharacter::Shoot);
+	PlayerInputComponent->BindAction(TEXT("Equip"), EInputEvent::IE_Pressed, this, &AShooterCharacter::Equip);
+	PlayerInputComponent->BindAction(TEXT("WeaponSwitchLast"), EInputEvent::IE_Pressed, this, &AShooterCharacter::WeaponSwitchLast);
+	PlayerInputComponent->BindAction(TEXT("WeaponSwitchNext"), EInputEvent::IE_Pressed, this, &AShooterCharacter::WeaponSwitchNext);
+
 }
 
 float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const &DamageEvent, AController *EventInstigator, AActor *DamageCauser)

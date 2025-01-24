@@ -3,11 +3,13 @@
 
 #include "Weapons/Gun.h"
 #include "Components/SceneComponent.h"
+#include "Components/BoxComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/DamageEvents.h"
-
+#include "Controllers/ShooterPlayerController.h"
+#include "Characters/ShooterCharacter.h"
 
 
 // Sets default values
@@ -19,8 +21,12 @@ AGun::AGun()
 	MyRootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 	SetRootComponent(MyRootComponent);
 
+	CollisionBoxComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision Box Component"));
+	CollisionBoxComponent->SetupAttachment(MyRootComponent);
+	CollisionBoxComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);	
+
 	SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
-	SkeletalMesh->SetupAttachment(MyRootComponent);
+	SkeletalMesh->SetupAttachment(CollisionBoxComponent);
 
 }
 
@@ -30,8 +36,8 @@ void AGun::PullTrigger()
 	UGameplayStatics::SpawnSoundAttached(MuzzleSound, SkeletalMesh, TEXT("MuzzleFlashSocket"));
 
 	FHitResult OutHit;
-	FVector ShotDirection;
-	bool bHit = GunTrace(OutHit, ShotDirection);
+	FVector ShotPosition, ShotDirection;
+	bool bHit = GunTrace(OutHit, ShotPosition, ShotDirection);
 	if (bHit) 
 	{
 		// DrawDebugPoint(GetWorld(), OutHit.Location, 20.f, FColor::Red, true);
@@ -54,10 +60,13 @@ void AGun::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
+	CollisionBoxComponent->OnComponentBeginOverlap.AddDynamic(this, &AGun::BeginOverlapFunc);	
+	CollisionBoxComponent->OnComponentEndOverlap.AddDynamic(this, &AGun::EndOverlapFunc);	
+
+
 }
 
-bool AGun::GunTrace(FHitResult &HitResult, FVector& ShotDirection)
+bool AGun::GunTrace(FHitResult &HitResult, FVector& ShotPosition, FVector& ShotDirection)
 {	
 	AController* OwnerController = GetOwnerController();
 	if (!OwnerController) {
@@ -69,6 +78,7 @@ bool AGun::GunTrace(FHitResult &HitResult, FVector& ShotDirection)
 	OwnerController->GetPlayerViewPoint(StartLocation, StartRotation);
 	// DrawDebugCamera(GetWorld(), StartLocation, StartRotation, 120, 2, FColor::Red, true);
 	FVector EndLocation = StartLocation + StartRotation.Vector() * MaxRange;
+	ShotPosition = StartLocation;
 	// 射击方向，故取负值。
 	ShotDirection = -StartRotation.Vector();
 
@@ -88,6 +98,37 @@ AController *AGun::GetOwnerController() const
 	}
 	
 	return OwnerPawn->GetController();
+}
+
+void AGun::BeginOverlapFunc(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	UE_LOG(LogTemp, Warning, TEXT("玩家重叠！"));
+	AShooterCharacter* OverlapCharacter = Cast<AShooterCharacter>(OtherActor);
+	if (OverlapCharacter)
+	{
+		OverlapCharacter->SetOverlapGun(this);
+		AShooterPlayerController* OverlapCharacterController = Cast<AShooterPlayerController>(OverlapCharacter->GetController());
+		if (OverlapCharacterController)
+		{
+			OverlapCharacterController->ShowEquipHUD();
+		}
+	}
+
+}
+
+void AGun::EndOverlapFunc(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	UE_LOG(LogTemp, Warning, TEXT("玩家不再重叠！"));
+	AShooterCharacter* OverlapCharacter = Cast<AShooterCharacter>(OtherActor);
+	if (OverlapCharacter)
+	{	
+		OverlapCharacter->ClearOverlapGun();
+		AShooterPlayerController* OverlapCharacterController = Cast<AShooterPlayerController>(OverlapCharacter->GetController());
+		if (OverlapCharacterController)
+		{
+			OverlapCharacterController->RemoveEquipHUD();
+		}
+	}
 }
 
 // Called every frame

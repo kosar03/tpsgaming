@@ -29,7 +29,10 @@ protected:
 	TSubclassOf<class AGun> GunClass;
 
 	UPROPERTY()
-	AGun *Gun;
+	AGun* BasicGun;
+
+	UPROPERTY()
+	AGun* OverlapGun;
 
 	UPROPERTY(EditDefaultsOnly);
 	float MaxHealth = 100;
@@ -39,6 +42,10 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	float PhysicalShield = 1;
+
+	TArray<class AGun*> EquippedGuns;
+
+	int32 WeaponIndex = 0;
 
 public:
 	// Called every frame
@@ -63,6 +70,13 @@ public:
 	void ShooterJump();
 	void Shoot();
 	void ShooterCrouch();
+	void WeaponSwitchLast();
+	void WeaponSwitchNext();
+	void Equip();
+
+	void SetOverlapGun(AGun* NewOverlapGun);
+	void ClearOverlapGun();
+	float GetHealth();
 
 private:
 

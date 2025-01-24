@@ -11,21 +11,7 @@
 	],
 	"settings": {
 		"typescript.tsc.autoDetect": "off",
-		"npm.autoDetect": "off",
-		"files.associations": {
-			"*.cjson": "jsonc",
-			"*.wxss": "css",
-			"*.wxs": "javascript",
-			"*.rh": "cpp",
-			"*.ipp": "cpp",
-			"__hash_table": "cpp",
-			"deque": "cpp",
-			"valarray": "cpp",
-			"vector": "cpp",
-			"filesystem": "cpp",
-			"xutility": "cpp",
-			"__config": "cpp"
-		}
+		"npm.autoDetect": "off"
 	},
 	"extensions": {
 		"recommendations": [

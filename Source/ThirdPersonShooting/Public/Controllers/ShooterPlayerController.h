@@ -20,7 +20,9 @@ public:
 
 	virtual void GameHasEnded(class AActor* EndGameFocus = nullptr, bool bIsWinner = false) override;
 
+	virtual void ShowEquipHUD();
 
+	virtual void RemoveEquipHUD();
 
 protected:
 	virtual void BeginPlay() override;
@@ -42,8 +44,14 @@ private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UUserWidget> HUDClass;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UUserWidget> EquipHUDClass;
+
 	UPROPERTY()
 	UUserWidget* HUD;
+
+	UPROPERTY()
+	UUserWidget* EquipHUD;
 
 	// 单位：秒。
 	UPROPERTY(EditAnywhere)

@@ -5,6 +5,7 @@
 #include "Blueprint/UserWidget.h"
 
 
+
 AShooterPlayerController::AShooterPlayerController()
 {
     
@@ -48,6 +49,21 @@ void AShooterPlayerController::GameHasEnded(AActor *EndGameFocus, bool bIsWinner
     GetWorldTimerManager().SetTimer(RestartTimerHandle, this, &AShooterPlayerController::RestartLevel, RestartDelay);
 }
 
+void AShooterPlayerController::ShowEquipHUD()
+{
+    if (EquipHUD) 
+    {
+        UE_LOG(LogTemp, Warning, TEXT("添加装备提示！"));
+        EquipHUD->AddToViewport();
+    }
+}
+
+void AShooterPlayerController::RemoveEquipHUD()
+{
+    UE_LOG(LogTemp, Warning, TEXT("去除EquipHUD！"));
+    EquipHUD->RemoveFromParent();
+}
+
 void AShooterPlayerController::BeginPlay()
 {
     HUD = CreateWidget(this, HUDClass);
@@ -56,4 +72,6 @@ void AShooterPlayerController::BeginPlay()
         UE_LOG(LogTemp, Warning, TEXT("添加HUD！"));
         HUD->AddToViewport();
     }
+    EquipHUD = CreateWidget(this, EquipHUDClass);
+
 }
