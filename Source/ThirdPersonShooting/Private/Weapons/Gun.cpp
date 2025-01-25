@@ -3,7 +3,7 @@
 
 #include "Weapons/Gun.h"
 #include "Components/SceneComponent.h"
-#include "Components/BoxComponent.h"
+#include "Components/SphereComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
@@ -18,15 +18,16 @@ AGun::AGun()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	MyRootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
-	SetRootComponent(MyRootComponent);
+	MyRootComponet = CreateDefaultSubobject<USceneComponent>(TEXT("My RootComponet"));
+	SetRootComponent(MyRootComponet);
 
-	CollisionBoxComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision Box Component"));
-	CollisionBoxComponent->SetupAttachment(MyRootComponent);
-	CollisionBoxComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);	
+	CollisionSphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("Collision Sphere Component"));
+	CollisionSphereComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);	
+	CollisionSphereComponent->SetupAttachment(MyRootComponet);
 
 	SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
-	SkeletalMesh->SetupAttachment(CollisionBoxComponent);
+	SkeletalMesh->SetupAttachment(MyRootComponet);
+
 
 }
 
@@ -60,8 +61,8 @@ void AGun::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CollisionBoxComponent->OnComponentBeginOverlap.AddDynamic(this, &AGun::BeginOverlapFunc);	
-	CollisionBoxComponent->OnComponentEndOverlap.AddDynamic(this, &AGun::EndOverlapFunc);	
+	CollisionSphereComponent->OnComponentBeginOverlap.AddDynamic(this, &AGun::BeginOverlapFunc);	
+	CollisionSphereComponent->OnComponentEndOverlap.AddDynamic(this, &AGun::EndOverlapFunc);	
 
 
 }
@@ -130,6 +131,7 @@ void AGun::EndOverlapFunc(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 		}
 	}
 }
+
 
 // Called every frame
 void AGun::Tick(float DeltaTime)

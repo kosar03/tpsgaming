@@ -20,10 +20,6 @@ public:
 
 	virtual void PullTrigger();
 
-
-private:
-
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -38,13 +34,17 @@ protected:
 	UFUNCTION()
 	virtual void EndOverlapFunc(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+private:
+
+public:
+
 protected:
 	UPROPERTY(VisibleAnywhere)
-	class USceneComponent* MyRootComponent;
+	class USphereComponent* CollisionSphereComponent;
 
 	UPROPERTY(VisibleAnywhere)
-	class UBoxComponent* CollisionBoxComponent;
-
+	class USceneComponent* MyRootComponet;
+	
 	UPROPERTY(VisibleAnywhere)
 	class USkeletalMeshComponent* SkeletalMesh;
 
@@ -65,6 +65,9 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	float Damage = 10;
+
+	UPROPERTY()
+	FVector AttachLocation;
 
 
 };

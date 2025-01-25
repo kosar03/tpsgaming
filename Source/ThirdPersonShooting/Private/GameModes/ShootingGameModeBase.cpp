@@ -14,3 +14,7 @@ void AShootingGameModeBase::PawnKilled(APawn *PawnKilled)
 
 }
 
+void AShootingGameModeBase::DecreaseEnemyCount()
+{
+
+}

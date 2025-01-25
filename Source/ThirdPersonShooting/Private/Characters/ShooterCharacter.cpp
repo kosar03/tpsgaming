@@ -6,6 +6,7 @@
 #include "Weapons/Gun.h"
 #include "Components/CapsuleComponent.h"
 #include "GameModes/ShootingGameModeBase.h"
+#include "Components/SphereComponent.h"
 
 
 
@@ -21,6 +22,9 @@ AShooterCharacter::AShooterCharacter()
 
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom);
+
+	Alive = ALIVE;
+
 }
 
 // Called when the game starts or when spawned
@@ -39,6 +43,7 @@ void AShooterCharacter::BeginPlay()
 	// GetMesh()->UnHideBoneByName(TEXT("weapon_r"));
 	BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
 	BasicGun->SetOwner(this);
+
 }
 
 // Called every frame
@@ -105,16 +110,21 @@ void AShooterCharacter::WeaponSwitchNext()
 }
 
 void AShooterCharacter::Equip()
-{
+{	
 	if (OverlapGun)
 	{
-		BasicGun->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-		UE_LOG(LogTemp, Warning, TEXT("卸下Gun！"));
+		if (BasicGun)
+		{
+			BasicGun->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+			UE_LOG(LogTemp, Warning, TEXT("卸下Gun！"));
+		}
 		BasicGun = OverlapGun;
+		BasicGun->SetActorLocation(FVector(0.f, 0.f, 0.f));
+		BasicGun->SetActorRotation(FRotator(0.f, 0.f, 0.f));
 		BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
 		BasicGun->SetOwner(this);
 		EquippedGuns.Add(BasicGun);
-		OverlapGun = nullptr;
+		SetOverlapGun(nullptr);
 	}
 	
 
@@ -165,7 +175,12 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const &Dama
 		AShootingGameModeBase *GameMode = GetWorld()->GetAuthGameMode<AShootingGameModeBase>();
 		if (GameMode)
 		{
-			GameMode->PawnKilled(this);
+			if (Alive)
+			{
+				GameMode->PawnKilled(this);
+				GameMode->DecreaseEnemyCount();
+				Alive = DEAD;
+			}
 		}
 
 		DetachFromControllerPendingDestroy();
@@ -175,7 +190,7 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const &Dama
 	return DamageToApply;
 }
 
-bool AShooterCharacter::IsDead()
+bool AShooterCharacter::IsDead() const
 {
 	return Health <= 0.f;
 }

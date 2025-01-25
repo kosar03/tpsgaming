@@ -19,4 +19,8 @@ public:
 
 	virtual void PawnKilled(APawn* PawnKilled);
 
+	virtual void DecreaseEnemyCount();
+
+protected:
+
 };
