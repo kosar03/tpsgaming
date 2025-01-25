@@ -6,6 +6,15 @@
 #include "GameFramework/Actor.h"
 #include "Gun.generated.h"
 
+#ifndef EQUIPPED
+#define EQUIPPED 1
+#endif
+
+#ifndef UNEQUIPPED
+#define UNEQUIPPED 0
+#endif
+
+
 UCLASS()
 class THIRDPERSONSHOOTING_API AGun : public AActor
 {
@@ -20,6 +29,14 @@ public:
 
 	virtual void PullTrigger();
 
+	UFUNCTION(BlueprintPure)
+	class USphereComponent* GetCollisionSphereComponent() const;
+
+	int32 GetEquipped() const;
+	void SetEquipped(int32 NewEquipped);
+
+	class USkeletalMeshComponent* GetPhysicalMesh() const;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -39,6 +56,9 @@ private:
 public:
 
 protected:
+	UPROPERTY()
+	int32 Equipped; 
+
 	UPROPERTY(VisibleAnywhere)
 	class USphereComponent* CollisionSphereComponent;
 

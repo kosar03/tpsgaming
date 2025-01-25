@@ -7,7 +7,7 @@
 #include "Components/CapsuleComponent.h"
 #include "GameModes/ShootingGameModeBase.h"
 #include "Components/SphereComponent.h"
-
+#include "Components/SkeletalMeshComponent.h"
 
 
 
@@ -114,17 +114,10 @@ void AShooterCharacter::Equip()
 	if (OverlapGun)
 	{
 		if (BasicGun)
-		{
-			BasicGun->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-			UE_LOG(LogTemp, Warning, TEXT("卸下Gun！"));
+		{	
+			DropEquippedGun();
 		}
-		BasicGun = OverlapGun;
-		BasicGun->SetActorLocation(FVector(0.f, 0.f, 0.f));
-		BasicGun->SetActorRotation(FRotator(0.f, 0.f, 0.f));
-		BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
-		BasicGun->SetOwner(this);
-		EquippedGuns.Add(BasicGun);
-		SetOverlapGun(nullptr);
+		EquipOverlapGun();
 	}
 	
 
@@ -140,9 +133,49 @@ void AShooterCharacter::ClearOverlapGun()
 	OverlapGun = nullptr;	
 }
 
-float AShooterCharacter::GetHealth()
+float AShooterCharacter::GetHealth() const 
 {
 	return Health;
+}
+
+int32 AShooterCharacter::GetAlive() const
+{
+    return Alive;
+}
+
+void AShooterCharacter::SetAlive(int32 NewAlive)
+{
+	Alive = NewAlive;
+}
+
+void AShooterCharacter::EquipOverlapGun()
+{
+	BasicGun = OverlapGun;
+	BasicGun->SetEquipped(EQUIPPED);
+	BasicGun->SetActorLocation(FVector(0.f, 0.f, 0.f));
+	BasicGun->SetActorRotation(FRotator(0.f, 0.f, 0.f));
+	BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
+	BasicGun->SetOwner(this);
+	EquippedGuns.Add(BasicGun);
+	SetOverlapGun(nullptr);
+	UE_LOG(LogTemp, Error, TEXT("装备Gun！"));
+}
+
+void AShooterCharacter::DropEquippedGun()
+{
+	BasicGun->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+	BasicGun->SetOwner(nullptr);
+	BasicGun->SetEquipped(UNEQUIPPED);
+	UE_LOG(LogTemp, Error, TEXT("丢弃Gun！"));
+
+	USkeletalMeshComponent* PhysicalMesh = BasicGun->GetPhysicalMesh();
+	if (PhysicalMesh)
+	{	
+		// PhysicalMesh->SetSimulatePhysics(true);
+		// PhysicalMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		// PhysicalMesh->SetEnableGravity(true);
+	}
+
 }
 
  // Called to bind functionality to input
@@ -171,15 +204,16 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const &Dama
 	UE_LOG(LogTemp, Warning, TEXT("HP decrease!, left %f"), Health);
 
 	if (IsDead())
-	{
+	{	
+		DropEquippedGun();
 		AShootingGameModeBase *GameMode = GetWorld()->GetAuthGameMode<AShootingGameModeBase>();
 		if (GameMode)
 		{
-			if (Alive)
+			if (GetAlive())
 			{
 				GameMode->PawnKilled(this);
 				GameMode->DecreaseEnemyCount();
-				Alive = DEAD;
+				SetAlive(DEAD);
 			}
 		}
 

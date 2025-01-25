@@ -28,7 +28,8 @@ AGun::AGun()
 	SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
 	SkeletalMesh->SetupAttachment(MyRootComponet);
 
-
+	SetOwner(nullptr);
+	SetEquipped(UNEQUIPPED);
 }
 
 void AGun::PullTrigger()
@@ -55,6 +56,25 @@ void AGun::PullTrigger()
 
 }
 
+USphereComponent *AGun::GetCollisionSphereComponent() const
+{
+    return CollisionSphereComponent;
+}
+
+int32 AGun::GetEquipped() const
+{
+    return Equipped;
+}
+
+void AGun::SetEquipped(int32 NewEquipped)
+{
+	Equipped = NewEquipped;
+}
+
+USkeletalMeshComponent *AGun::GetPhysicalMesh() const
+{
+    return SkeletalMesh;
+}
 
 // Called when the game starts or when spawned
 void AGun::BeginPlay()
@@ -111,7 +131,7 @@ void AGun::BeginOverlapFunc(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 		AShooterPlayerController* OverlapCharacterController = Cast<AShooterPlayerController>(OverlapCharacter->GetController());
 		if (OverlapCharacterController)
 		{
-			OverlapCharacterController->ShowEquipHUD();
+			if (!GetEquipped()) OverlapCharacterController->ShowEquipHUD();
 		}
 	}
 

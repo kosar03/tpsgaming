@@ -52,16 +52,22 @@ public:
 
 	void SetOverlapGun(class AGun* NewOverlapGun);
 	void ClearOverlapGun();
-	float GetHealth();
+	float GetHealth() const;
+	int32 GetAlive() const;
+	void SetAlive(int32 NewAlive);
+	void DropEquippedGun();
+	void EquipOverlapGun();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:
-	int32 Alive;
 
 protected:
+	UPROPERTY()
+	int32 Alive;
+	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Component")
 	class USpringArmComponent *CameraBoom;
 
