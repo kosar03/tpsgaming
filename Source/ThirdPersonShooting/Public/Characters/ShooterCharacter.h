@@ -53,6 +53,8 @@ public:
 	void SetOverlapGun(class AGun* NewOverlapGun);
 	void ClearOverlapGun();
 	float GetHealth() const;
+	void SetHealth(float NewHealth);
+	void UpdateHealth(float DeltaHealth);
 	int32 GetAlive() const;
 	void SetAlive(int32 NewAlive);
 	void DropEquippedGun();
@@ -82,6 +84,12 @@ protected:
 
 	UPROPERTY()
 	AGun* OverlapGun;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<class ADropBall> DropBallClass;
+
+	UPROPERTY();
+	ADropBall* DropBall;
 
 	UPROPERTY(EditDefaultsOnly);
 	float MaxHealth = 100;

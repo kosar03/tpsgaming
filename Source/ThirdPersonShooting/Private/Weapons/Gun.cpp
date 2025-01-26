@@ -4,7 +4,7 @@
 #include "Weapons/Gun.h"
 #include "Components/SceneComponent.h"
 #include "Components/SphereComponent.h"
-#include "Components/SkeletalMeshComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/DamageEvents.h"
@@ -18,24 +18,25 @@ AGun::AGun()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	MyRootComponet = CreateDefaultSubobject<USceneComponent>(TEXT("My RootComponet"));
-	SetRootComponent(MyRootComponet);
-
+	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	SetRootComponent(StaticMeshComponent);
+	
 	CollisionSphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("Collision Sphere Component"));
 	CollisionSphereComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);	
-	CollisionSphereComponent->SetupAttachment(MyRootComponet);
+	CollisionSphereComponent->SetupAttachment(StaticMeshComponent);
 
-	SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
-	SkeletalMesh->SetupAttachment(MyRootComponet);
 
 	SetOwner(nullptr);
 	SetEquipped(UNEQUIPPED);
+
+	GunName = TEXT("Rifle");
+
 }
 
 void AGun::PullTrigger()
 {
-	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, SkeletalMesh, TEXT("MuzzleFlashSocket"));
-	UGameplayStatics::SpawnSoundAttached(MuzzleSound, SkeletalMesh, TEXT("MuzzleFlashSocket"));
+	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, StaticMeshComponent, TEXT("MuzzleFlashSocket"));
+	UGameplayStatics::SpawnSoundAttached(MuzzleSound, StaticMeshComponent, TEXT("MuzzleFlashSocket"));
 
 	FHitResult OutHit;
 	FVector ShotPosition, ShotDirection;
@@ -71,9 +72,14 @@ void AGun::SetEquipped(int32 NewEquipped)
 	Equipped = NewEquipped;
 }
 
-USkeletalMeshComponent *AGun::GetPhysicalMesh() const
+UStaticMeshComponent *AGun::GetStaticMeshComponent() const
 {
-    return SkeletalMesh;
+    return StaticMeshComponent;
+}
+
+FName AGun::GetGunName() const
+{
+    return GunName;
 }
 
 // Called when the game starts or when spawned

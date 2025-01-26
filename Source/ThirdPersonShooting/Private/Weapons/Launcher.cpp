@@ -8,7 +8,7 @@
 
 ALauncher::ALauncher()
 {
-
+    GunName = TEXT("Launcher");
 }
 
 void ALauncher::PullTrigger()

@@ -14,4 +14,8 @@ class THIRDPERSONSHOOTING_API AEnemyShooterCharacter : public AShooterCharacter
 {
 	GENERATED_BODY()
 	
+public:
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
+
 };

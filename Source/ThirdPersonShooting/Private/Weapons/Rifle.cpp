@@ -8,7 +8,7 @@
 
 ARifle::ARifle()
 {
-
+    GunName = TEXT("Rifle");
 }
 
 void ARifle::PullTrigger()

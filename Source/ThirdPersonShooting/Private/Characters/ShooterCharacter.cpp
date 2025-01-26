@@ -41,8 +41,10 @@ void AShooterCharacter::BeginPlay()
 
 	GetMesh()->HideBoneByName(TEXT("weapon_r"), EPhysBodyOp::PBO_None);
 	// GetMesh()->UnHideBoneByName(TEXT("weapon_r"));
-	BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
+	FName SocketName = FName(*(BasicGun->GetGunName().ToString() + TEXT("Socket")));
+	BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, SocketName);
 	BasicGun->SetOwner(this);
+	BasicGun->GetStaticMeshComponent()->SetSimulatePhysics(false);
 
 }
 
@@ -50,6 +52,7 @@ void AShooterCharacter::BeginPlay()
 void AShooterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
 }
 
 void AShooterCharacter::MoveForward(float AxisValue)
@@ -138,6 +141,18 @@ float AShooterCharacter::GetHealth() const
 	return Health;
 }
 
+void AShooterCharacter::SetHealth(float NewHealth)
+{
+	NewHealth = FMath::Min(MaxHealth, NewHealth);
+	NewHealth = FMath::Max(0.f, NewHealth);
+	Health = NewHealth;
+}
+
+void AShooterCharacter::UpdateHealth(float DeltaHealth)
+{
+	SetHealth(Health + DeltaHealth);
+}
+
 int32 AShooterCharacter::GetAlive() const
 {
     return Alive;
@@ -152,9 +167,11 @@ void AShooterCharacter::EquipOverlapGun()
 {
 	BasicGun = OverlapGun;
 	BasicGun->SetEquipped(EQUIPPED);
+	BasicGun->GetStaticMeshComponent()->SetSimulatePhysics(false);
 	BasicGun->SetActorLocation(FVector(0.f, 0.f, 0.f));
 	BasicGun->SetActorRotation(FRotator(0.f, 0.f, 0.f));
-	BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
+	FName SocketName = FName(*(BasicGun->GetGunName().ToString() + TEXT("Socket")));
+	BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, SocketName);
 	BasicGun->SetOwner(this);
 	EquippedGuns.Add(BasicGun);
 	SetOverlapGun(nullptr);
@@ -166,15 +183,8 @@ void AShooterCharacter::DropEquippedGun()
 	BasicGun->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	BasicGun->SetOwner(nullptr);
 	BasicGun->SetEquipped(UNEQUIPPED);
+	BasicGun->GetStaticMeshComponent()->SetSimulatePhysics(true);
 	UE_LOG(LogTemp, Error, TEXT("丢弃Gun！"));
-
-	USkeletalMeshComponent* PhysicalMesh = BasicGun->GetPhysicalMesh();
-	if (PhysicalMesh)
-	{	
-		// PhysicalMesh->SetSimulatePhysics(true);
-		// PhysicalMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-		// PhysicalMesh->SetEnableGravity(true);
-	}
 
 }
 
@@ -205,12 +215,12 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const &Dama
 
 	if (IsDead())
 	{	
-		DropEquippedGun();
 		AShootingGameModeBase *GameMode = GetWorld()->GetAuthGameMode<AShootingGameModeBase>();
 		if (GameMode)
 		{
 			if (GetAlive())
 			{
+				DropEquippedGun();
 				GameMode->PawnKilled(this);
 				GameMode->DecreaseEnemyCount();
 				SetAlive(DEAD);
@@ -219,6 +229,7 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const &Dama
 
 		DetachFromControllerPendingDestroy();
 		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 	return DamageToApply;

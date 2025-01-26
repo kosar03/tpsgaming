@@ -35,8 +35,10 @@ public:
 	int32 GetEquipped() const;
 	void SetEquipped(int32 NewEquipped);
 
-	class USkeletalMeshComponent* GetPhysicalMesh() const;
+	class UStaticMeshComponent* GetStaticMeshComponent() const;
 	
+	FName GetGunName() const;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -56,17 +58,17 @@ private:
 public:
 
 protected:
+	UPROPERTY(VisibleAnywhere)
+	FName GunName;
+
 	UPROPERTY()
 	int32 Equipped; 
 
 	UPROPERTY(VisibleAnywhere)
 	class USphereComponent* CollisionSphereComponent;
-
-	UPROPERTY(VisibleAnywhere)
-	class USceneComponent* MyRootComponet;
 	
 	UPROPERTY(VisibleAnywhere)
-	class USkeletalMeshComponent* SkeletalMesh;
+	class UStaticMeshComponent* StaticMeshComponent;
 
 	UPROPERTY(EditAnywhere)
 	class UParticleSystem* MuzzleFlash;
