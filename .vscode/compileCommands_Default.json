@@ -88,6 +88,30 @@
 		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
 	},
 	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\GameModes\\StartMenuGameMode.cpp",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_Default\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Legacies\\DropBall.cpp",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_Default\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Legacies\\HealingDropBall.cpp",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_Default\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+	},
+	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Weapons\\Gun.cpp",
 		"arguments": [
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
@@ -193,6 +217,30 @@
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\GameModes\\ShootingGameModeBase.h",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_Default\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\GameModes\\StartMenuGameMode.h",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_Default\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Legacies\\DropBall.h",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_Default\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Legacies\\HealingDropBall.h",
 		"arguments": [
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_Default\\ThirdPersonShooting.1.rsp"

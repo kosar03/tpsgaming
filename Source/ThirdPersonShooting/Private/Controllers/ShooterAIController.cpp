@@ -27,7 +27,7 @@ void AShooterAIController::BeginPlay()
 
     // 玩家控制Pawn编号从0开始。
     PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-
+    
     if (AIBehaviorTree)
     {
         RunBehaviorTree(AIBehaviorTree);

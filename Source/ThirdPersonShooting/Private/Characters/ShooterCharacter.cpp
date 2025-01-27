@@ -23,6 +23,8 @@ AShooterCharacter::AShooterCharacter()
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom);
 
+	
+	Health = MaxHealth;
 	Alive = ALIVE;
 
 }
