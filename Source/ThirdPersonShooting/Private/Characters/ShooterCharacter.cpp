@@ -8,6 +8,8 @@
 #include "GameModes/ShootingGameModeBase.h"
 #include "Components/SphereComponent.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Sound/SoundBase.h"
 
 
 
@@ -167,6 +169,17 @@ void AShooterCharacter::SetAlive(int32 NewAlive)
 
 void AShooterCharacter::EquipOverlapGun()
 {
+	if (BasicGun->GetGunType() == OverlapGun->GetGunType())
+	{
+		OverlapGun->SetRemainingAmmoCount(BasicGun->GetRemainingAmmoCount());
+	}
+	
+	USoundBase* SwitchGunSound = OverlapGun->GetSwitchGunSound();
+	if (SwitchGunSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, SwitchGunSound, GetActorLocation());
+	}
+
 	BasicGun = OverlapGun;
 	BasicGun->SetEquipped(EQUIPPED);
 	BasicGun->GetStaticMeshComponent()->SetSimulatePhysics(false);
@@ -178,6 +191,17 @@ void AShooterCharacter::EquipOverlapGun()
 	EquippedGuns.Add(BasicGun);
 	SetOverlapGun(nullptr);
 	UE_LOG(LogTemp, Error, TEXT("装备Gun！"));
+}
+
+void AShooterCharacter::Reload()
+{
+	if (BasicGun && BasicGun->GetRemainingAmmoCount())
+	{
+		BasicGun->SetRemainingAmmoCount(BasicGun->GetAmmoCount() + BasicGun->GetRemainingAmmoCount());
+		int32 DeltaAmmoCount = FMath::Min(BasicGun->GetRemainingAmmoCount(), BasicGun->GetFullAmmoCount());
+		BasicGun->SetRemainingAmmoCount(BasicGun->GetRemainingAmmoCount() - DeltaAmmoCount);
+		BasicGun->SetAmmoCount(DeltaAmmoCount);	
+	}
 }
 
 void AShooterCharacter::DropEquippedGun()
@@ -205,6 +229,7 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCo
 	PlayerInputComponent->BindAction(TEXT("Equip"), EInputEvent::IE_Pressed, this, &AShooterCharacter::Equip);
 	PlayerInputComponent->BindAction(TEXT("WeaponSwitchLast"), EInputEvent::IE_Pressed, this, &AShooterCharacter::WeaponSwitchLast);
 	PlayerInputComponent->BindAction(TEXT("WeaponSwitchNext"), EInputEvent::IE_Pressed, this, &AShooterCharacter::WeaponSwitchNext);
+	PlayerInputComponent->BindAction(TEXT("Reload"), EInputEvent::IE_Pressed, this, &AShooterCharacter::Reload);
 
 }
 

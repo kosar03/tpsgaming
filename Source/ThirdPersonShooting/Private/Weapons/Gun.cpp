@@ -5,11 +5,13 @@
 #include "Components/SceneComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/AudioComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/DamageEvents.h"
 #include "Controllers/ShooterPlayerController.h"
 #include "Characters/ShooterCharacter.h"
+
 
 
 // Sets default values
@@ -25,9 +27,12 @@ AGun::AGun()
 	CollisionSphereComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);	
 	CollisionSphereComponent->SetupAttachment(StaticMeshComponent);
 
-
+	GunType = 0;
 	SetOwner(nullptr);
 	SetEquipped(UNEQUIPPED);
+
+	FullAmmoCount = 30;
+	AmmoCount = FullAmmoCount;
 
 	GunName = TEXT("Rifle");
 
@@ -35,6 +40,8 @@ AGun::AGun()
 
 void AGun::PullTrigger()
 {
+	if (!GetAmmoCount()) {return;}
+	if (GetOwnerController()->IsPlayerController()) --AmmoCount;
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, StaticMeshComponent, TEXT("MuzzleFlashSocket"));
 	UGameplayStatics::SpawnSoundAttached(MuzzleSound, StaticMeshComponent, TEXT("MuzzleFlashSocket"));
 
@@ -82,6 +89,11 @@ FName AGun::GetGunName() const
     return GunName;
 }
 
+void AGun::UpdateRemainingAmmoCount(int32 DeltaRemainingAmmoCount)
+{
+	SetRemainingAmmoCount(RemainingAmmoCount + DeltaRemainingAmmoCount);
+}
+
 // Called when the game starts or when spawned
 void AGun::BeginPlay()
 {
@@ -90,7 +102,8 @@ void AGun::BeginPlay()
 	CollisionSphereComponent->OnComponentBeginOverlap.AddDynamic(this, &AGun::BeginOverlapFunc);	
 	CollisionSphereComponent->OnComponentEndOverlap.AddDynamic(this, &AGun::EndOverlapFunc);	
 
-
+	AmmoCount = FullAmmoCount;
+	
 }
 
 bool AGun::GunTrace(FHitResult &HitResult, FVector& ShotPosition, FVector& ShotDirection)
@@ -157,7 +170,6 @@ void AGun::EndOverlapFunc(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 		}
 	}
 }
-
 
 // Called every frame
 void AGun::Tick(float DeltaTime)

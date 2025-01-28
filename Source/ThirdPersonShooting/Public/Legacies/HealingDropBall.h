@@ -15,7 +15,7 @@ class THIRDPERSONSHOOTING_API AHealingDropBall : public ADropBall
 	GENERATED_BODY()
 
 protected:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float HealingCount;
 
 public:

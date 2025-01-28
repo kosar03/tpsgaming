@@ -39,6 +39,28 @@ public:
 	
 	FName GetGunName() const;
 
+	UFUNCTION(BlueprintPure)
+	int32 GetRemainingAmmoCount() const {return RemainingAmmoCount;}
+	UFUNCTION(BlueprintCallable)
+	void SetRemainingAmmoCount(int32 NewRemainingAmmoCount) {RemainingAmmoCount = NewRemainingAmmoCount;}
+	UFUNCTION(BlueprintPure)
+	int32 GetFullAmmoCount() const {return FullAmmoCount;}
+	UFUNCTION(BlueprintCallable)
+	void SetFullAmmoCount(int32 NewFullAmmoCount) {FullAmmoCount = NewFullAmmoCount;}
+	UFUNCTION(BlueprintPure)
+	int32 GetAmmoCount() const {return AmmoCount;}
+	UFUNCTION(BlueprintCallable)
+	void SetAmmoCount(int32 NewAmmoCount) {AmmoCount = NewAmmoCount;}
+
+	UFUNCTION(BlueprintPure)
+	int32 GetGunType() const {return GunType;}
+	UFUNCTION(BlueprintCallable)
+	void SetGunType(int32 NewGunType) {GunType = NewGunType;}
+
+	void UpdateRemainingAmmoCount(int32 DeltaRemaingAmmoCount);
+
+	class USoundBase* GetSwitchGunSound() const { return SwitchGunSound; }
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -83,6 +105,9 @@ protected:
 	class USoundBase* ImpactSound;
 
 	UPROPERTY(EditAnywhere)
+	class USoundBase* SwitchGunSound;
+
+	UPROPERTY(EditAnywhere)
 	float MaxRange = 10000;
 
 	UPROPERTY(EditAnywhere)
@@ -91,6 +116,17 @@ protected:
 	UPROPERTY()
 	FVector AttachLocation;
 
+	UPROPERTY(EditDefaultsOnly)
+	int32 RemainingAmmoCount = 0;
+
+	UPROPERTY(EditDefaultsOnly)
+	int32 FullAmmoCount = 30;
+
+	UPROPERTY(VisibleAnywhere)
+	int32 AmmoCount = 30;
+
+	UPROPERTY(VisibleAnywhere)
+	int32 GunType = 0;
 
 };
 

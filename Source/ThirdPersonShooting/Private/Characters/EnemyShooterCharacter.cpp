@@ -6,7 +6,7 @@
 #include "Components/WidgetComponent.h"
 #include "UIs/EnemyHealthBarWidget.h"
 #include "Components/ProgressBar.h"
-
+#include "Math/UnrealMathUtility.h"
 
 
 AEnemyShooterCharacter::AEnemyShooterCharacter()
@@ -36,13 +36,25 @@ float AEnemyShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const 
 {
     float DamageToApply = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 
-    if (!GetAlive() && !DropBall)
+    if (!GetAlive())
     {
         UWorld* World = GetWorld();
         if (World)
         {
-            DropBall = World->SpawnActor<ADropBall>(DropBallClass);
-            DropBall->SetActorLocation(GetActorLocation());
+            ADropBall* DropBall = nullptr;
+            float RandomValue = FMath::RandRange(0, 1000) / 1000.0f;
+            if (RandomValue <= 0.3f)
+            {
+                DropBall = World->SpawnActor<ADropBall>(HealingBallClass);
+            }  
+            else 
+            {
+                DropBall = World->SpawnActor<ADropBall>(AmmoDropBallClass);
+            }
+            if (DropBall)
+            {
+                DropBall->SetActorLocation(GetActorLocation());
+            }
         }
     }
 

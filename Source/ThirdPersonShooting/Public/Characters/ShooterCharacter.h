@@ -59,6 +59,10 @@ public:
 	void SetAlive(int32 NewAlive);
 	void DropEquippedGun();
 	void EquipOverlapGun();
+	void Reload();
+
+	class AGun* GetBasicGun() const { return BasicGun; }
+	class AGun* GetOverlapGun() const { return OverlapGun; } 
 
 protected:
 	// Called when the game starts or when spawned
@@ -79,17 +83,17 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<class AGun> GunClass;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	AGun* BasicGun;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	AGun* OverlapGun;
 
 	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<class ADropBall> DropBallClass;
+	TSubclassOf<class ADropBall> HealingBallClass;
 
-	UPROPERTY();
-	ADropBall* DropBall;
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<class ADropBall> AmmoDropBallClass;
 
 	UPROPERTY(EditDefaultsOnly);
 	float MaxHealth = 100;
