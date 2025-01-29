@@ -28,6 +28,7 @@ AShooterCharacter::AShooterCharacter()
 	
 	Health = MaxHealth;
 	Alive = ALIVE;
+	Shooting = UNSHOOTING;
 
 }
 
@@ -50,6 +51,8 @@ void AShooterCharacter::BeginPlay()
 	BasicGun->SetOwner(this);
 	BasicGun->GetStaticMeshComponent()->SetSimulatePhysics(false);
 
+	Alive = ALIVE;
+	Shooting = UNSHOOTING;
 }
 
 // Called every frame
@@ -86,11 +89,21 @@ void AShooterCharacter::ShooterJump()
 
 void AShooterCharacter::Shoot()
 {
-	if (BasicGun)
+	if (BasicGun && BasicGun->GetAmmoCount())
 	{
 		BasicGun->PullTrigger();
+		Shooting = SHOOTING;
 	}
 }
+
+void AShooterCharacter::ShootEnd()
+{
+	if (BasicGun)
+	{
+		Shooting = UNSHOOTING;
+	}
+}
+
 
 void AShooterCharacter::ShooterCrouch()
 {
@@ -226,6 +239,7 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCo
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &AShooterCharacter::ShooterJump);
 	PlayerInputComponent->BindAction(TEXT("Crouch"), EInputEvent::IE_Pressed, this, &AShooterCharacter::ShooterCrouch);
 	PlayerInputComponent->BindAction(TEXT("Shoot"), EInputEvent::IE_Pressed, this, &AShooterCharacter::Shoot);
+	PlayerInputComponent->BindAction(TEXT("Shoot"), EInputEvent::IE_Released, this, &AShooterCharacter::ShootEnd);
 	PlayerInputComponent->BindAction(TEXT("Equip"), EInputEvent::IE_Pressed, this, &AShooterCharacter::Equip);
 	PlayerInputComponent->BindAction(TEXT("WeaponSwitchLast"), EInputEvent::IE_Pressed, this, &AShooterCharacter::WeaponSwitchLast);
 	PlayerInputComponent->BindAction(TEXT("WeaponSwitchNext"), EInputEvent::IE_Pressed, this, &AShooterCharacter::WeaponSwitchNext);

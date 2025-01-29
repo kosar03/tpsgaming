@@ -14,6 +14,14 @@
 #define ALIVE 1
 #endif
 
+#ifndef SHOOTING
+#define SHOOTING 1
+#endif
+
+#ifndef UNSHOOTING
+#define UNSHOOTING 0
+#endif
+
 
 UCLASS()
 class THIRDPERSONSHOOTING_API AShooterCharacter : public ACharacter
@@ -38,6 +46,9 @@ public:
 	UFUNCTION(BlueprintPure)
 	float GetHealthPercent() const;
 
+	UFUNCTION(BlueprintPure)
+	bool IsShooting() const { return (bool)Shooting; }
+
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
 	void LookUp(float AxisValue);
@@ -45,6 +56,7 @@ public:
 
 	void ShooterJump();
 	void Shoot();
+	void ShootEnd();
 	void ShooterCrouch();
 	void WeaponSwitchLast();
 	void WeaponSwitchNext();
@@ -73,6 +85,9 @@ public:
 protected:
 	UPROPERTY()
 	int32 Alive;
+
+	UPROPERTY()
+	int32 Shooting;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Component")
 	class USpringArmComponent *CameraBoom;

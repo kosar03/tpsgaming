@@ -6,6 +6,7 @@
 #include "Kismet/GameplayStatics.h"
 
 
+
 ARifle::ARifle()
 {
     GunName = TEXT("Rifle");
