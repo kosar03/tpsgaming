@@ -28,7 +28,7 @@ protected:
 	UFUNCTION()
 	virtual void EndOverlapFunc(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	virtual void BallEffect(AActor* EffectActor);
+	virtual void BallEffect(AActor* InstigatorBall, AActor* EffectActor);
 	
 public:	
 

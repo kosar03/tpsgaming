@@ -4,17 +4,36 @@
 #include "Weapons/Launcher.h"
 #include "Engine/DamageEvents.h"
 #include "Kismet/GameplayStatics.h"
+#include "Characters/ShooterCharacter.h"
+
 
 
 ALauncher::ALauncher()
 {
     GunName = TEXT("Launcher");
 
-    GunType = 2;
+    GunType = SHOTGUN;
+
+    ReloadingDelay = 5.0f;
+    FireSpeed = 1.0f;
 }
 
 void ALauncher::PullTrigger()
 {
     Super::PullTrigger();
+    
+    AController* OOwnerController = GetOwnerController();
+    if (OOwnerController) 
+    {
+        if (OOwnerController->IsPlayerController()) 
+        {
+            GetWorldTimerManager().SetTimer(PullTriggerTimerHandle, this, &ALauncher::CeaseFire, 1.0f);
+        }
+    }
+}
+
+void ALauncher::CeaseFire()
+{   
+    Super::CeaseFire();
 
 }

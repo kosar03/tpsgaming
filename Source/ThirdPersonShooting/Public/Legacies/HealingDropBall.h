@@ -25,5 +25,5 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-	virtual void BallEffect(AActor* EffectActor) override;
+	virtual void BallEffect(AActor* InstigatorBall, AActor* EffectActor) override;
 };

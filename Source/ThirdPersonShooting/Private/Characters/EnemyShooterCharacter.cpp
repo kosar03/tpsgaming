@@ -7,6 +7,8 @@
 #include "UIs/EnemyHealthBarWidget.h"
 #include "Components/ProgressBar.h"
 #include "Math/UnrealMathUtility.h"
+#include "Weapons/Gun.h"
+#include "Components/SphereComponent.h"
 
 
 AEnemyShooterCharacter::AEnemyShooterCharacter()
@@ -91,5 +93,23 @@ void AEnemyShooterCharacter::BeginPlay()
 {
     Super::BeginPlay();
 
+    UWorld *World = GetWorld();
+    BasicGun = World->SpawnActor<AGun>(GunClass);
+    EquippedGuns.Add(BasicGun);
+    WeaponIndex = 0;
+
+    SetEquippedGunCollision(BasicGun);
+
+    BasicGun->SetActorLocation(FVector(0.f, 0.f, 0.f));
+    BasicGun->SetActorRotation(FRotator(0.f, 0.f, 0.f));
+    FName SocketName = FName(*(BasicGun->GetGunName().ToString() + TEXT("Socket")));
+    BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, SocketName);
+    BasicGun->SetOwner(this);
+
+    
+    BasicGun->SetEquipped(EQUIPPED);
+    HasGun = HASGUN;
+    Aiming = AIMING;
+    
     UpdateHealthBarPercent();
 }

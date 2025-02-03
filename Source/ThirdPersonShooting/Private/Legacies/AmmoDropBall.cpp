@@ -4,6 +4,8 @@
 #include "Legacies/AmmoDropBall.h"
 #include "Characters/ShooterCharacter.h"
 #include "Weapons/Gun.h"
+#include "Kismet/GameplayStatics.h"
+#include "Sound/SoundBase.h"
 
 
 
@@ -17,10 +19,11 @@ void AAmmoDropBall::BeginPlay()
     Super::BeginPlay();
 }
 
-void AAmmoDropBall::BallEffect(AActor *EffectActor)
+void AAmmoDropBall::BallEffect(AActor* InstigatorBall, AActor *EffectActor)
 {
     AShooterCharacter* EffectCharacter = Cast<AShooterCharacter>(EffectActor);
-    if (EffectCharacter)
+    if (!EffectCharacter->IsHasGun() || !EffectCharacter->GetBasicGun()) { return; }
+    if (EffectCharacter && EffectCharacter->IsHasGun())
     {
         AGun* BasicGun = EffectCharacter->GetBasicGun();
         if (BasicGun)
@@ -29,4 +32,11 @@ void AAmmoDropBall::BallEffect(AActor *EffectActor)
         }
     }
 
+    if (BallSound) 
+    {
+        UGameplayStatics::PlaySoundAtLocation(GetWorld(), BallSound, GetActorLocation());
+    }
+	InstigatorBall->Destroy();
+
 }
+

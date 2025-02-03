@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Weapons/Gun.h"
+#include "GunType.h"
 #include "Launcher.generated.h"
+
 
 /**
  * 
@@ -18,9 +20,10 @@ public:
 	ALauncher();
 
 	virtual void PullTrigger() override;
-
+	virtual void CeaseFire() override;
 public:
 
+protected:
 
 private:
 

@@ -13,5 +13,12 @@ UCLASS()
 class THIRDPERSONSHOOTING_API APlayerShooterCharacter : public AShooterCharacter
 {
 	GENERATED_BODY()
-	
+
+protected:
+
+public:
+	virtual void Shoot() override;
+	virtual void ShootEnd() override;
+
+
 };

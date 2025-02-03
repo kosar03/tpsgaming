@@ -5,7 +5,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\AI\\BTService_PlayerLocationIfSeen.cpp",
@@ -13,7 +13,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\AI\\BTTask_ClearBlackValue.cpp",
@@ -21,7 +21,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\AI\\BTTask_Shoot.cpp",
@@ -29,7 +29,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\AnimInstances\\ShooterCharacterAnimInstance.cpp",
@@ -37,7 +37,15 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\AnimNotifies\\SwitchingGunAnimNotify.cpp",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Characters\\EnemyShooterCharacter.cpp",
@@ -45,7 +53,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Characters\\PlayerShooterCharacter.cpp",
@@ -53,7 +61,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Characters\\ShooterCharacter.cpp",
@@ -61,7 +69,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Controllers\\ShooterAIController.cpp",
@@ -69,7 +77,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Controllers\\ShooterPlayerController.cpp",
@@ -77,7 +85,15 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\CustomEnums\\WeaponTypeEnum.cpp",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\GameModes\\KillEmAllGameMode.cpp",
@@ -85,7 +101,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\GameModes\\ShootingGameModeBase.cpp",
@@ -93,7 +109,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\GameModes\\StartMenuGameMode.cpp",
@@ -101,7 +117,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Legacies\\AmmoDropBall.cpp",
@@ -109,7 +125,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Legacies\\DropBall.cpp",
@@ -117,7 +133,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Legacies\\HealingDropBall.cpp",
@@ -125,7 +141,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\UIs\\EnemyHealthBarWidget.cpp",
@@ -133,7 +149,23 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Weapons\\AssaultRifle.cpp",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Weapons\\Bullet.cpp",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Weapons\\Gun.cpp",
@@ -141,7 +173,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Weapons\\Launcher.cpp",
@@ -149,7 +181,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Weapons\\Rifle.cpp",
@@ -157,7 +189,15 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\Weapons\\ShotGun.cpp",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\AI\\BTService_PlayerLocation.h",
@@ -165,7 +205,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\AI\\BTService_PlayerLocationIfSeen.h",
@@ -173,7 +213,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\AI\\BTTask_ClearBlackValue.h",
@@ -181,7 +221,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\AI\\BTTask_Shoot.h",
@@ -189,7 +229,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\AnimInstances\\ShooterCharacterAnimInstance.h",
@@ -197,7 +237,23 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\AnimNotifies\\SwitchingGunAnimNotify.h",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Characters\\CharacterState.h",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Characters\\EnemyShooterCharacter.h",
@@ -205,7 +261,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Characters\\PlayerShooterCharacter.h",
@@ -213,7 +269,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Characters\\ShooterCharacter.h",
@@ -221,7 +277,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Controllers\\ShooterAIController.h",
@@ -229,7 +285,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Controllers\\ShooterPlayerController.h",
@@ -237,7 +293,15 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\CustomEnums\\WeaponTypeEnum.h",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\GameModes\\KillEmAllGameMode.h",
@@ -245,7 +309,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\GameModes\\ShootingGameModeBase.h",
@@ -253,7 +317,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\GameModes\\StartMenuGameMode.h",
@@ -261,7 +325,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Legacies\\AmmoDropBall.h",
@@ -269,7 +333,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Legacies\\DropBall.h",
@@ -277,7 +341,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Legacies\\HealingDropBall.h",
@@ -285,7 +349,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\UIs\\EnemyHealthBarWidget.h",
@@ -293,7 +357,23 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Weapons\\AssaultRifle.h",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Weapons\\Bullet.h",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Weapons\\Gun.h",
@@ -301,7 +381,23 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Weapons\\GunState.h",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Weapons\\GunType.h",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Weapons\\Launcher.h",
@@ -309,7 +405,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Weapons\\Rifle.h",
@@ -317,7 +413,15 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Weapons\\ShotGun.h",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\ThirdPersonShooting.Build.cs",
@@ -325,7 +429,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\ThirdPersonShooting.cpp",
@@ -333,7 +437,7 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\ThirdPersonShooting.h",
@@ -341,6 +445,6 @@
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_ThirdPersonShooting\\ThirdPersonShooting.1.rsp"
 		],
-		"directory": "E:\\Epic\\Unreal Engine\\UE_5.3\\Engine\\Source"
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	}
 ]

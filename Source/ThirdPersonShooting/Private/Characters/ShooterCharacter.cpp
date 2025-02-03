@@ -10,6 +10,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 
@@ -25,11 +26,21 @@ AShooterCharacter::AShooterCharacter()
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom);
 
+	//设置角色动作组件的类变量
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->bUseControllerDesiredRotation = true;
+	GetCharacterMovement()->bIgnoreBaseRotation = true;
 	
+	BasicGun = OverlapGun = nullptr;
 	Health = MaxHealth;
 	Alive = ALIVE;
 	Shooting = UNSHOOTING;
+	Reloading = UNRELOADING;
+	Switching = UNSWITCHING;
+	HasGun = HASNOGUN;
+	Aiming = UNAIMING;
 
+	
 }
 
 // Called when the game starts or when spawned
@@ -37,39 +48,51 @@ void AShooterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	BasicGun = OverlapGun = nullptr;
+	HasGun = HASNOGUN;
+	Aiming = UNAIMING;
 	Health = MaxHealth;
-
-	UWorld *World = GetWorld();
-	BasicGun = World->SpawnActor<AGun>(GunClass);
-	EquippedGuns.Add(BasicGun);
-	WeaponIndex = 0;
-
-	GetMesh()->HideBoneByName(TEXT("weapon_r"), EPhysBodyOp::PBO_None);
-	// GetMesh()->UnHideBoneByName(TEXT("weapon_r"));
-	FName SocketName = FName(*(BasicGun->GetGunName().ToString() + TEXT("Socket")));
-	BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, SocketName);
-	BasicGun->SetOwner(this);
-	BasicGun->GetStaticMeshComponent()->SetSimulatePhysics(false);
-
 	Alive = ALIVE;
 	Shooting = UNSHOOTING;
+	Reloading = UNRELOADING;
+	Switching = UNSWITCHING;
 }
 
 // Called every frame
 void AShooterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
+
 }
 
 void AShooterCharacter::MoveForward(float AxisValue)
 {
-	AddMovementInput(GetActorForwardVector() * AxisValue);
+	if (Controller && AxisValue)
+	{
+		// 找出向前方向
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
+
+		// 获取向前矢量
+		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		AddMovementInput(Direction, AxisValue);
+	}
 }
 
 void AShooterCharacter::MoveRight(float AxisValue)
 {
-	AddMovementInput(GetActorRightVector() * AxisValue);
+	if (Controller && AxisValue)
+	{
+		// 找出向右方向
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
+
+		// 获取向右矢量
+		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+
+		// 添加该方向动作
+		AddMovementInput(Direction, AxisValue);
+	}
 }
 
 void AShooterCharacter::LookUp(float AxisValue)
@@ -87,21 +110,30 @@ void AShooterCharacter::ShooterJump()
 	Super::Jump();
 }
 
+bool AShooterCharacter::CanShoot()
+{
+	return HasGun && BasicGun && BasicGun->GetAmmoCount() && !Reloading && !Switching && !Shooting;
+}
+
 void AShooterCharacter::Shoot()
 {
-	if (BasicGun && BasicGun->GetAmmoCount())
+	if (CanShoot())
 	{
 		BasicGun->PullTrigger();
-		Shooting = SHOOTING;
+		Shooting = SHOOTING; 
+	}
+	else 
+	{
+		ShootEnd();
 	}
 }
 
 void AShooterCharacter::ShootEnd()
 {
-	if (BasicGun)
-	{
-		Shooting = UNSHOOTING;
-	}
+	if (HasGun && BasicGun) 
+    {
+        BasicGun->PullTriggerEnd();
+    }
 }
 
 
@@ -120,28 +152,93 @@ void AShooterCharacter::WeaponSwitchLast()
 	{
 		--WeaponIndex;
 	}
-	UE_LOG(LogTemp, Warning, TEXT("切换下一武器。"));
+
 } 
 
 void AShooterCharacter::WeaponSwitchNext()
 {
 	WeaponIndex = (WeaponIndex + 1) % EquippedGuns.Num();
-	UE_LOG(LogTemp, Warning, TEXT("切换上一武器。"));
+
 }
 
 void AShooterCharacter::Equip()
+{
+    if (OverlapGun)
+    {	
+		AGun* LastEquippedGun = BasicGun;
+        if (BasicGun)
+        {
+			Reloading = UNRELOADING;
+            DropEquippedGun();
+        }
+        EquipOverlapGun(LastEquippedGun);
+        Switching = SWITCHING;
+        if (Aiming) Aiming = UNAIMING;
+        GetWorldTimerManager().SetTimer(SwitchingTimerHandle, this, &AShooterCharacter::EquipEnd, SwitchingDelay);
+    }
+}
+
+void AShooterCharacter::EquipEnd()
 {	
-	if (OverlapGun)
-	{
-		if (BasicGun)
-		{	
-			DropEquippedGun();
-		}
-		EquipOverlapGun();
-	}
-	
+	Switching = UNSWITCHING;
 
 }
+
+void AShooterCharacter::DropEquippedGun()
+{
+	if (!HasGun && !BasicGun) 
+	{
+		return ;
+	}
+	BasicGun->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+	BasicGun->SetOwner(nullptr);
+	BasicGun->SetEquipped(UNEQUIPPED);
+
+	BasicGun = nullptr;
+	HasGun = HASNOGUN;
+}
+
+void AShooterCharacter::EquipOverlapGun(AGun* LastEquippedGun)
+{
+	if (LastEquippedGun && LastEquippedGun->GetGunType() == OverlapGun->GetGunType())
+	{
+		OverlapGun->SetRemainingAmmoCount(LastEquippedGun->GetRemainingAmmoCount());
+	}
+
+	USoundBase* SwitchGunSound = OverlapGun->GetSwitchGunSound();
+	if (SwitchGunSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, SwitchGunSound, GetActorLocation());
+	}
+
+	BasicGun = OverlapGun;
+	BasicGun->SetEquipped(EQUIPPED);
+	BasicGun->GetSkeletalMeshComponent()->SetSimulatePhysics(false);
+	BasicGun->SetActorLocation(FVector(0.f, 0.f, 0.f));
+	BasicGun->SetActorRotation(FRotator(0.f, 0.f, 0.f));
+	FName SocketName = FName(*(BasicGun->GetGunName().ToString() + TEXT("Socket")));
+	BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, SocketName);
+	BasicGun->SetOwner(this);
+
+	SetEquippedGunCollision(BasicGun);
+	EquippedGuns.Add(BasicGun);
+	SetOverlapGun(nullptr);
+	HasGun = HASGUN;
+
+	if (LastEquippedGun)
+	{
+		SetDroppedGunCollision(LastEquippedGun);
+	}
+}
+
+void AShooterCharacter::DropWeapon()
+{
+	SetDroppedGunCollision(BasicGun);
+	DropEquippedGun();
+
+	BasicGun = nullptr;
+}
+
 
 void AShooterCharacter::SetOverlapGun(AGun* NewOverlapGun)
 {
@@ -180,51 +277,71 @@ void AShooterCharacter::SetAlive(int32 NewAlive)
 	Alive = NewAlive;
 }
 
-void AShooterCharacter::EquipOverlapGun()
+bool AShooterCharacter::CanReload()
 {
-	if (BasicGun->GetGunType() == OverlapGun->GetGunType())
-	{
-		OverlapGun->SetRemainingAmmoCount(BasicGun->GetRemainingAmmoCount());
-	}
-	
-	USoundBase* SwitchGunSound = OverlapGun->GetSwitchGunSound();
-	if (SwitchGunSound)
-	{
-		UGameplayStatics::PlaySoundAtLocation(this, SwitchGunSound, GetActorLocation());
-	}
-
-	BasicGun = OverlapGun;
-	BasicGun->SetEquipped(EQUIPPED);
-	BasicGun->GetStaticMeshComponent()->SetSimulatePhysics(false);
-	BasicGun->SetActorLocation(FVector(0.f, 0.f, 0.f));
-	BasicGun->SetActorRotation(FRotator(0.f, 0.f, 0.f));
-	FName SocketName = FName(*(BasicGun->GetGunName().ToString() + TEXT("Socket")));
-	BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, SocketName);
-	BasicGun->SetOwner(this);
-	EquippedGuns.Add(BasicGun);
-	SetOverlapGun(nullptr);
-	UE_LOG(LogTemp, Error, TEXT("装备Gun！"));
+	return BasicGun && BasicGun->GetRemainingAmmoCount() && BasicGun->GetFullAmmoCount() > BasicGun->GetAmmoCount() && !Reloading && !Switching && !Shooting;
 }
 
 void AShooterCharacter::Reload()
 {
-	if (BasicGun && BasicGun->GetRemainingAmmoCount())
+	if (CanReload())
 	{
 		BasicGun->SetRemainingAmmoCount(BasicGun->GetAmmoCount() + BasicGun->GetRemainingAmmoCount());
 		int32 DeltaAmmoCount = FMath::Min(BasicGun->GetRemainingAmmoCount(), BasicGun->GetFullAmmoCount());
 		BasicGun->SetRemainingAmmoCount(BasicGun->GetRemainingAmmoCount() - DeltaAmmoCount);
 		BasicGun->SetAmmoCount(DeltaAmmoCount);	
+		Reloading = RELOADING;
+		if (Aiming) Aiming = UNAIMING;
+		BasicGun->Reload();
+		GetWorldTimerManager().SetTimer(ReloadingTimerHandle, this, &AShooterCharacter::ReloadEnd, BasicGun->GetReloadingDelay());
 	}
 }
 
-void AShooterCharacter::DropEquippedGun()
+void AShooterCharacter::ReloadEnd()
 {
-	BasicGun->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-	BasicGun->SetOwner(nullptr);
-	BasicGun->SetEquipped(UNEQUIPPED);
-	BasicGun->GetStaticMeshComponent()->SetSimulatePhysics(true);
-	UE_LOG(LogTemp, Error, TEXT("丢弃Gun！"));
+	if (BasicGun) 
+	{
+		Reloading = UNRELOADING;
+	}
+}
 
+
+bool AShooterCharacter::CanAim()
+{
+	return HasGun && BasicGun && !Reloading && !Switching;
+}
+
+void AShooterCharacter::Aim()
+{
+	if (CanAim())
+	{
+		bUseControllerRotationYaw = true;
+		GetCharacterMovement()->bOrientRotationToMovement = false;
+		Aiming = AIMING;
+	}
+}
+
+void AShooterCharacter::AimEnd()
+{
+	bUseControllerRotationYaw = false;
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	Aiming = UNAIMING;
+}
+
+void AShooterCharacter::SetEquippedGunCollision(AGun* EquippedGun)
+{
+	if (!EquippedGun) return;
+	EquippedGun->GetSkeletalMeshComponent()->SetSimulatePhysics(false);
+	EquippedGun->GetSkeletalMeshComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	EquippedGun->GetCollisionSphereComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+} 
+
+void AShooterCharacter::SetDroppedGunCollision(AGun* DroppedGun)
+{
+	if (!DroppedGun) return;
+	DroppedGun->GetSkeletalMeshComponent()->SetSimulatePhysics(true);
+	DroppedGun->GetSkeletalMeshComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	DroppedGun->GetCollisionSphereComponent()->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 }
 
  // Called to bind functionality to input
@@ -244,6 +361,11 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCo
 	PlayerInputComponent->BindAction(TEXT("WeaponSwitchLast"), EInputEvent::IE_Pressed, this, &AShooterCharacter::WeaponSwitchLast);
 	PlayerInputComponent->BindAction(TEXT("WeaponSwitchNext"), EInputEvent::IE_Pressed, this, &AShooterCharacter::WeaponSwitchNext);
 	PlayerInputComponent->BindAction(TEXT("Reload"), EInputEvent::IE_Pressed, this, &AShooterCharacter::Reload);
+	PlayerInputComponent->BindAction(TEXT("DropWeapon"), EInputEvent::IE_Pressed, this, &AShooterCharacter::DropWeapon);
+
+	// 瞄准绑定已在蓝图中的设置
+	// PlayerInputComponent->BindAction(TEXT("Aim"), EInputEvent::IE_Pressed, this, &AShooterCharacter::Aim);
+	// PlayerInputComponent->BindAction(TEXT("Aim"), EInputEvent::IE_Released, this, &AShooterCharacter::AimEnd);
 
 }
 
@@ -261,6 +383,10 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const &Dama
 		{
 			if (GetAlive())
 			{
+				if (BasicGun)
+				{
+					SetDroppedGunCollision(BasicGun);
+				}
 				DropEquippedGun();
 				GameMode->PawnKilled(this);
 				GameMode->DecreaseEnemyCount();
@@ -284,4 +410,13 @@ bool AShooterCharacter::IsDead() const
 float AShooterCharacter::GetHealthPercent() const
 {
     return Health / MaxHealth;
+}
+
+int32 AShooterCharacter::GetGunType() const
+{
+	if (HasGun && BasicGun)
+	{
+		return BasicGun->GetGunType();
+	}
+	return -1;
 }

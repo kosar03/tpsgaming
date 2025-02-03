@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Weapons/Gun.h"
+#include "GunType.h"
 #include "Rifle.generated.h"
 
 /**
@@ -18,5 +19,9 @@ public:
 	ARifle();
 
 	virtual void PullTrigger() override;
-	
+	virtual void PullTriggerEnd() override;
+	virtual void CeaseFire() override;
+
+protected:
+
 };

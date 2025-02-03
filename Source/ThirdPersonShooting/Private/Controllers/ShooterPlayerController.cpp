@@ -15,7 +15,6 @@ void AShooterPlayerController::GameHasEnded(AActor *EndGameFocus, bool bIsWinner
 {
     Super::GameHasEnded(EndGameFocus, bIsWinner);
 
-    UE_LOG(LogTemp, Warning, TEXT("You Win!"));
     HUD->RemoveFromParent();
 
     if (bIsWinner)
@@ -24,12 +23,7 @@ void AShooterPlayerController::GameHasEnded(AActor *EndGameFocus, bool bIsWinner
         UUserWidget *WinScreen = CreateWidget(this, WinScreenClass);
         if (WinScreen)
         {
-            UE_LOG(LogTemp, Warning, TEXT("添加Win Screen！"));
             WinScreen->AddToViewport();
-        }
-        else 
-        {
-            UE_LOG(LogTemp, Error, TEXT("WinScreen* 为nullptr！"));
         }
     }
     else
@@ -37,12 +31,7 @@ void AShooterPlayerController::GameHasEnded(AActor *EndGameFocus, bool bIsWinner
         UUserWidget *LoseScreen = CreateWidget(this, LoseScreenClass);
         if (LoseScreen)
         {
-            UE_LOG(LogTemp, Warning, TEXT("添加Lose Screen！"));
             LoseScreen->AddToViewport();
-        }
-        else 
-        {
-            UE_LOG(LogTemp, Error, TEXT("LoseScreen* 为nullptr！"));
         }
     }
 
@@ -53,14 +42,12 @@ void AShooterPlayerController::ShowEquipHUD()
 {
     if (EquipHUD) 
     {
-        UE_LOG(LogTemp, Warning, TEXT("添加装备提示！"));
         EquipHUD->AddToViewport();
     }
 }
 
 void AShooterPlayerController::RemoveEquipHUD()
 {
-    UE_LOG(LogTemp, Warning, TEXT("去除EquipHUD！"));
     EquipHUD->RemoveFromParent();
 }
 
@@ -69,7 +56,6 @@ void AShooterPlayerController::BeginPlay()
     HUD = CreateWidget(this, HUDClass);
     if (HUD) 
     {
-        UE_LOG(LogTemp, Warning, TEXT("添加HUD！"));
         HUD->AddToViewport();
     }
     EquipHUD = CreateWidget(this, EquipHUDClass);

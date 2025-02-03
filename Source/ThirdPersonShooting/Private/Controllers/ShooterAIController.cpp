@@ -8,6 +8,7 @@
 void AShooterAIController::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+
 }
 
 bool AShooterAIController::IsDead() const

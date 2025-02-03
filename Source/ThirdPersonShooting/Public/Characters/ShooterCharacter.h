@@ -4,23 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "CharacterState.h"
 #include "ShooterCharacter.generated.h"
 
-#ifndef DEAD
-#define DEAD 0
-#endif
-
-#ifndef ALIVE
-#define ALIVE 1
-#endif
-
-#ifndef SHOOTING
-#define SHOOTING 1
-#endif
-
-#ifndef UNSHOOTING
-#define UNSHOOTING 0
-#endif
 
 
 UCLASS()
@@ -48,19 +34,40 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	bool IsShooting() const { return (bool)Shooting; }
+	void SetShooting(bool NewShooting) { Shooting = NewShooting; }
+
+	UFUNCTION(BlueprintPure)
+	bool IsReloading() const { return (bool)Reloading; }
+
+	UFUNCTION(BlueprintPure)
+	bool IsSwitching() const { return (bool)Switching; }
+
+	UFUNCTION(BlueprintPure)
+	bool IsHasGun() const { return (bool)HasGun; }
+
+	UFUNCTION(BlueprintPure)
+	bool IsAiming() const { return (bool)Aiming; }
+
+	UFUNCTION(BlueprintCallable)
+	void SetIsAiming(bool NewAiming) { Aiming = NewAiming; }
+
+	UFUNCTION(BlueprintPure)
+	int32 GetGunType() const;
 
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
 	void LookUp(float AxisValue);
 	void LookRight(float AxisValue);
 
-	void ShooterJump();
-	void Shoot();
-	void ShootEnd();
-	void ShooterCrouch();
-	void WeaponSwitchLast();
-	void WeaponSwitchNext();
-	void Equip();
+	virtual void ShooterJump();
+	virtual bool CanShoot();
+	virtual void Shoot();
+	virtual void ShootEnd();
+	virtual void ShooterCrouch();
+	virtual void WeaponSwitchLast();
+	virtual void WeaponSwitchNext();
+	virtual void Equip();
+	virtual void EquipEnd();
 
 	void SetOverlapGun(class AGun* NewOverlapGun);
 	void ClearOverlapGun();
@@ -69,12 +76,23 @@ public:
 	void UpdateHealth(float DeltaHealth);
 	int32 GetAlive() const;
 	void SetAlive(int32 NewAlive);
+	
 	void DropEquippedGun();
-	void EquipOverlapGun();
+	void EquipOverlapGun(class AGun* LastEquippedGun);
+	bool CanReload();
 	void Reload();
+	void ReloadEnd();
+	void DropWeapon();
+	bool CanAim();
+	void Aim();
+	void AimEnd();
 
 	class AGun* GetBasicGun() const { return BasicGun; }
 	class AGun* GetOverlapGun() const { return OverlapGun; } 
+
+	void SetEquippedGunCollision(class AGun* EquippedGun);
+	void SetDroppedGunCollision(class AGun* DroppedGun);
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -88,7 +106,19 @@ protected:
 
 	UPROPERTY()
 	int32 Shooting;
+
+	UPROPERTY()
+	int32 Reloading;
 	
+	UPROPERTY()
+	int32 Switching;
+
+	UPROPERTY()
+	int32 HasGun;
+
+	UPROPERTY()
+	int32 Aiming;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Component")
 	class USpringArmComponent *CameraBoom;
 
@@ -122,6 +152,14 @@ protected:
 	TArray<class AGun*> EquippedGuns;
 
 	int32 WeaponIndex = 0;
+
+	// 单位：秒。
+	UPROPERTY(EditAnywhere)
+	float SwitchingDelay = 0.5f;
+
+	FTimerHandle SwitchingTimerHandle;
+
+	FTimerHandle ReloadingTimerHandle;
 
 private:
 

@@ -4,15 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GunState.h"
+#include "GunType.h"
 #include "Gun.generated.h"
 
-#ifndef EQUIPPED
-#define EQUIPPED 1
-#endif
-
-#ifndef UNEQUIPPED
-#define UNEQUIPPED 0
-#endif
 
 
 UCLASS()
@@ -28,46 +23,55 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void PullTrigger();
+	virtual void PullTriggerEnd();
+	virtual void CeaseFire();
+	virtual void GunShoot();
+
 
 	UFUNCTION(BlueprintPure)
 	class USphereComponent* GetCollisionSphereComponent() const;
 
 	int32 GetEquipped() const;
 	void SetEquipped(int32 NewEquipped);
-
-	class UStaticMeshComponent* GetStaticMeshComponent() const;
 	
+	UFUNCTION(BlueprintPure)
+	class USkeletalMeshComponent* GetSkeletalMeshComponent() const;
+
 	FName GetGunName() const;
 
 	UFUNCTION(BlueprintPure)
 	int32 GetRemainingAmmoCount() const {return RemainingAmmoCount;}
 	UFUNCTION(BlueprintCallable)
-	void SetRemainingAmmoCount(int32 NewRemainingAmmoCount) {RemainingAmmoCount = NewRemainingAmmoCount;}
+	void SetRemainingAmmoCount(int32 NewRemainingAmmoCount) { RemainingAmmoCount = NewRemainingAmmoCount; }
 	UFUNCTION(BlueprintPure)
-	int32 GetFullAmmoCount() const {return FullAmmoCount;}
+	int32 GetFullAmmoCount() const { return FullAmmoCount; }
 	UFUNCTION(BlueprintCallable)
-	void SetFullAmmoCount(int32 NewFullAmmoCount) {FullAmmoCount = NewFullAmmoCount;}
+	void SetFullAmmoCount(int32 NewFullAmmoCount) { FullAmmoCount = NewFullAmmoCount; }
 	UFUNCTION(BlueprintPure)
-	int32 GetAmmoCount() const {return AmmoCount;}
+	int32 GetAmmoCount() const { return AmmoCount; }
 	UFUNCTION(BlueprintCallable)
-	void SetAmmoCount(int32 NewAmmoCount) {AmmoCount = NewAmmoCount;}
+	void SetAmmoCount(int32 NewAmmoCount) { AmmoCount = NewAmmoCount; }
 
 	UFUNCTION(BlueprintPure)
 	int32 GetGunType() const {return GunType;}
 	UFUNCTION(BlueprintCallable)
-	void SetGunType(int32 NewGunType) {GunType = NewGunType;}
+	void SetGunType(int32 NewGunType) { GunType = NewGunType; }
+	float GetReloadingDelay() const { return ReloadingDelay; }
 
 	void UpdateRemainingAmmoCount(int32 DeltaRemaingAmmoCount);
 
 	class USoundBase* GetSwitchGunSound() const { return SwitchGunSound; }
 
+	float GetDamage() const { return Damage; }
+
+	AController* GetOwnerController() const;
+	
+	void Reload();
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	bool GunTrace(FHitResult& HitResult, FVector& ShotPosition, FVector& ShotDirection);
-
-	AController* GetOwnerController() const;
 
 	UFUNCTION()
 	virtual void BeginOverlapFunc(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -80,8 +84,8 @@ private:
 public:
 
 protected:
-	UPROPERTY(VisibleAnywhere)
-	FName GunName;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunAttribute")
+	float ReloadingDelay = 2.0f;
 
 	UPROPERTY()
 	int32 Equipped; 
@@ -90,31 +94,32 @@ protected:
 	class USphereComponent* CollisionSphereComponent;
 	
 	UPROPERTY(VisibleAnywhere)
-	class UStaticMeshComponent* StaticMeshComponent;
+	class USkeletalMeshComponent* SkeletalMeshComponent;
 
 	UPROPERTY(EditAnywhere)
 	class UParticleSystem* MuzzleFlash;
-
-	UPROPERTY(EditAnywhere);
-	class UParticleSystem* ImpactEffect;
 
 	UPROPERTY(EditAnywhere)
 	class USoundBase* MuzzleSound;
 
 	UPROPERTY(EditAnywhere)
-	class USoundBase* ImpactSound;
-
-	UPROPERTY(EditAnywhere)
 	class USoundBase* SwitchGunSound;
 
 	UPROPERTY(EditAnywhere)
+	TSubclassOf<class ABullet> BulletClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunAttribute")
+	FName GunName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunAttribute")
 	float MaxRange = 10000;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunAttribute")
 	float Damage = 10;
 
-	UPROPERTY()
-	FVector AttachLocation;
+	// 每秒射击次数
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunAttribute")
+	float FireSpeed = 4.f;
 
 	UPROPERTY(EditDefaultsOnly)
 	int32 RemainingAmmoCount = 0;
@@ -126,8 +131,17 @@ protected:
 	int32 AmmoCount = 30;
 
 	UPROPERTY(VisibleAnywhere)
-	int32 GunType = 0;
+	int32 GunType = DEFAULTGUNTYPE;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+	class UAnimMontage* FireAnimationMontage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+	class UAnimMontage* ReloadAnimationMontage;
+
+
+	FTimerHandle PullTriggerTimerHandle;
+	FTimerHandle PullTriggerEndTimerHandle;
 };
 
 
