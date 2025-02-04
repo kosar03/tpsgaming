@@ -9,8 +9,7 @@
 #include "Sound/SoundBase.h"
 #include "Engine/DamageEvents.h"
 #include "Weapons/Gun.h"
-#include "Components/DecalComponent.h"
-
+#include "Particles/ParticleSystemComponent.h"
 
 // Sets default values
 ABullet::ABullet()
@@ -24,14 +23,22 @@ ABullet::ABullet()
 	BoxComponent->SetNotifyRigidBodyCollision(true);
 	BoxComponent->SetSimulatePhysics(true);
 	BoxComponent->SetCollisionObjectType(ECollisionChannel::ECC_GameTraceChannel1);
+	BoxComponent->SetUseCCD(true);
+	FBodyInstance* BodyInstance = BoxComponent->GetBodyInstance();
+	if (BodyInstance)
+	{
+		BodyInstance->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		BodyInstance->SetUseCCD(true);
+	}
 	SetRootComponent(BoxComponent);
 
 	BulletMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Bullet Mesh Component"));
 	BulletMeshComponent->SetupAttachment(BoxComponent);
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement Component"));
-	ProjectileMovementComponent->InitialSpeed = 8000.f;
-	ProjectileMovementComponent->MaxSpeed = 8000.f;
+	ProjectileMovementComponent->InitialSpeed = 5678.f;
+	ProjectileMovementComponent->MaxSpeed = 5678.f;
+	ProjectileMovementComponent->bSweepCollision = true;
 	ProjectileMovementComponent->bRotationFollowsVelocity = true;
 	ProjectileMovementComponent->bShouldBounce = true;
 	ProjectileMovementComponent->Bounciness = 0.3f;
@@ -45,6 +52,12 @@ void ABullet::BeginPlay()
 	Super::BeginPlay();
 	
 	OnActorHit.AddDynamic(this, &ABullet::OnBulletHit);
+
+	if (TracerEffect)
+	{
+		TracerEffectComponent = UGameplayStatics::SpawnEmitterAttached(TracerEffect, BoxComponent, FName(), GetActorLocation(), GetActorRotation(), EAttachLocation::KeepWorldPosition);
+	}
+
 
 }
 

@@ -53,7 +53,6 @@ void AKillEmAllGameMode::BeginPlay()
 {
     int cnt = GetOriginEnemyCount();
     SetEnemyCount(cnt);
-    UE_LOG(LogTemp, Warning, TEXT("初始敌人数目：%d"), cnt);
 }
 
 int32 AKillEmAllGameMode::GetOriginEnemyCount()

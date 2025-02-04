@@ -48,6 +48,7 @@ void AShooterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	WalkSpeed = GetCharacterMovement()->MaxWalkSpeed;
 	BasicGun = OverlapGun = nullptr;
 	HasGun = HASNOGUN;
 	Aiming = UNAIMING;
@@ -317,6 +318,7 @@ void AShooterCharacter::Aim()
 	{
 		bUseControllerRotationYaw = true;
 		GetCharacterMovement()->bOrientRotationToMovement = false;
+		GetCharacterMovement()->MaxWalkSpeed = AimSpeed;
 		Aiming = AIMING;
 	}
 }
@@ -325,6 +327,7 @@ void AShooterCharacter::AimEnd()
 {
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 	Aiming = UNAIMING;
 }
 

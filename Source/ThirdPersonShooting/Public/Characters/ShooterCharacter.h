@@ -147,6 +147,12 @@ protected:
 	float Health;
 
 	UPROPERTY(EditAnywhere)
+	float AimSpeed = 320.f;
+
+	UPROPERTY(EditAnywhere)
+	float WalkSpeed;
+
+	UPROPERTY(EditAnywhere)
 	float PhysicalShield = 1;
 
 	TArray<class AGun*> EquippedGuns;

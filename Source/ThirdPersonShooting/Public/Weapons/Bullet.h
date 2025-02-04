@@ -41,6 +41,12 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	class UProjectileMovementComponent* ProjectileMovementComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Effects")
+	class UParticleSystem* TracerEffect;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Effects")
+	class UParticleSystemComponent* TracerEffectComponent;
+
 	UPROPERTY(EditAnywhere);
 	class UParticleSystem* ImpactEffect;
 

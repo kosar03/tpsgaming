@@ -15,10 +15,8 @@ AHealingDropBall::AHealingDropBall()
 void AHealingDropBall::BallEffect(AActor* InstigatorBall, AActor* EffectActor)
 {
     AShooterCharacter* EffectCharacter = Cast<AShooterCharacter>(EffectActor);
-    if (EffectCharacter)
-    {
-        EffectCharacter->UpdateHealth(HealingCount);
-    }
+    if (!EffectCharacter) { return; }
+    EffectCharacter->UpdateHealth(HealingCount);
 
     if (BallSound) 
     {

@@ -31,7 +31,12 @@ void ADropBall::BeginPlay()
 
 void ADropBall::BeginOverlapFunc(UPrimitiveComponent *OverlappedComponent, AActor *OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult)
 {
-	BallEffect(this, OtherActor);
+	APawn* Pawn = Cast<APawn>(OtherActor);
+	AController* Controller = Pawn->GetController();
+	if (Controller->IsPlayerController())
+	{
+		BallEffect(this, OtherActor);
+	}
 }
 
 void ADropBall::EndOverlapFunc(UPrimitiveComponent *OverlappedComponent, AActor *OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex)

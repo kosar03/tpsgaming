@@ -14,7 +14,7 @@
 #include "Animation/AnimInstance.h"
 #include "Animation/AnimMontage.h"
 #include "Weapons/Bullet.h"
-
+#include "Kismet/KismetMathLibrary.h"
 
 
 // Sets default values
@@ -98,27 +98,41 @@ void AGun::GunShoot()
 	FVector BulletStartLocation;
 	FVector BulletEndLocation;
 	FRotator BulletStartRotation;
-	// FRotator BulletEndRotation;
+	FHitResult HitResult;
 
 	if (OwnerController) { 
 		OwnerController->GetPlayerViewPoint(BulletStartLocation, BulletStartRotation); 
 		BulletEndLocation = BulletStartLocation + BulletStartRotation.Vector() * MaxRange;
-		if (!(OwnerCharacter->IsAiming()))
-		{
-			BulletStartLocation = SkeletalMeshComponent->GetSocketLocation(TEXT("BulletEmitter"));
-			BulletStartRotation = SkeletalMeshComponent->GetSocketRotation(TEXT("BulletEmitter"));
-		}
+		// if (!(OwnerCharacter->IsAiming()))
+		// {
+		// }
+		BulletStartLocation = SkeletalMeshComponent->GetSocketLocation(TEXT("BulletEmitter"));
 	}
 
-	ABullet* Bullet = GetWorld()->SpawnActor<ABullet>(BulletClass, BulletStartLocation, BulletStartRotation);
-	if (Bullet) {
-		Bullet->SetOwner(this); 
-		Bullet->SetActorScale3D(FVector(0.8f, 0.8f, 0.8f));
-		FVector ShootDirection = BulletEndLocation - BulletStartLocation;
-		ShootDirection.Normalize();
-		Bullet->InitVelocity(ShootDirection);
-		Bullet->BulletDestroyDelay();
+	FCollisionQueryParams Params;
+	Params.AddIgnoredActor(this);
+	Params.AddIgnoredActor(GetOwner());
+	GetWorld()->LineTraceSingleByChannel(HitResult, BulletStartLocation, BulletEndLocation, ECollisionChannel::ECC_GameTraceChannel1, Params);
+	if (!HitResult.bBlockingHit) {
+		HitResult.ImpactPoint = BulletEndLocation;
 	}
+
+	FVector HitTarget = HitResult.ImpactPoint;
+	FVector ToTarget = HitTarget - BulletStartLocation;
+	FRotator TargetRotation = ToTarget.Rotation();
+	if (BulletClass && OwnerCharacter)
+	{
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = this;
+		SpawnParams.Instigator = OwnerCharacter;
+		ABullet* Bullet = GetWorld()->SpawnActor<ABullet>(BulletClass, BulletStartLocation, TargetRotation, SpawnParams);
+		if (Bullet)
+		{
+			Bullet->InitVelocity(TargetRotation.Vector());
+			Bullet->BulletDestroyDelay();
+		}
+	}
+	
 	//
 
 	// FHitResult OutHit;
@@ -179,30 +193,6 @@ void AGun::BeginPlay()
 
 	AmmoCount = FullAmmoCount;
 
-}
-
-bool AGun::GunTrace(FHitResult &HitResult, FVector& ShotPosition, FVector& ShotDirection)
-{	
-	AController* OwnerController = GetOwnerController();
-	if (!OwnerController) {
-		return false;
-	}
-
-	FVector StartLocation;
-	FRotator StartRotation;
-	OwnerController->GetPlayerViewPoint(StartLocation, StartRotation);
-	// DrawDebugCamera(GetWorld(), StartLocation, StartRotation, 120, 2, FColor::Red, true);
-	FVector EndLocation = StartLocation + StartRotation.Vector() * MaxRange;
-	ShotPosition = StartLocation;
-	// 射击方向，故取负值。
-	ShotDirection = -StartRotation.Vector();
-
-	FCollisionQueryParams Params;
-	Params.AddIgnoredActor(this);
-	Params.AddIgnoredActor(GetOwner());
-	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECollisionChannel::ECC_GameTraceChannel1, Params);
-
-	return bHit; 
 }
 
 AController *AGun::GetOwnerController() const

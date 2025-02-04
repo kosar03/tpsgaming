@@ -22,6 +22,7 @@ void AAmmoDropBall::BeginPlay()
 void AAmmoDropBall::BallEffect(AActor* InstigatorBall, AActor *EffectActor)
 {
     AShooterCharacter* EffectCharacter = Cast<AShooterCharacter>(EffectActor);
+    if (!EffectCharacter) { return; }
     if (!EffectCharacter->IsHasGun() || !EffectCharacter->GetBasicGun()) { return; }
     if (EffectCharacter && EffectCharacter->IsHasGun())
     {

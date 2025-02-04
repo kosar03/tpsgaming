@@ -9,6 +9,8 @@
 #include "Math/UnrealMathUtility.h"
 #include "Weapons/Gun.h"
 #include "Components/SphereComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+
 
 
 AEnemyShooterCharacter::AEnemyShooterCharacter()
@@ -110,6 +112,8 @@ void AEnemyShooterCharacter::BeginPlay()
     BasicGun->SetEquipped(EQUIPPED);
     HasGun = HASGUN;
     Aiming = AIMING;
+
+    GetCharacterMovement()->MaxWalkSpeed = 200.f;
     
     UpdateHealthBarPercent();
 }

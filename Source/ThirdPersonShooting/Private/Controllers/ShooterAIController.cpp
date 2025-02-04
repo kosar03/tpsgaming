@@ -33,7 +33,7 @@ void AShooterAIController::BeginPlay()
     {
         RunBehaviorTree(AIBehaviorTree);
 
-        // 获取控制器所控制的Pawn。
+        // 获取控制器所控制的Pawn的StartLocation。
         GetBlackboardComponent()->SetValueAsVector(TEXT("StartLocation"), GetPawn()->GetActorLocation());
     }
 }

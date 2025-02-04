@@ -24,12 +24,12 @@ EBTNodeResult::Type UBTTask_Shoot::ExecuteTask(UBehaviorTreeComponent &OwnerComp
         return EBTNodeResult::Failed;
     }
 
-    APawn* PlayerPawn = AIController->GetPawn();
-    if (!PlayerPawn) {
+    APawn* AIPawn = AIController->GetPawn();
+    if (!AIPawn) {
         return EBTNodeResult::Failed;
     }
 
-    AShooterCharacter* ShooterCharacter = Cast<AShooterCharacter>(PlayerPawn);
+    AShooterCharacter* ShooterCharacter = Cast<AShooterCharacter>(AIPawn);
     if (!ShooterCharacter) {
         return EBTNodeResult::Failed;
     }
