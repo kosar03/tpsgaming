@@ -27,6 +27,8 @@ public:
 
 	void BulletDestroyDelay();
 
+	class UProjectileMovementComponent* GetProjectileMovementComponent() const { return ProjectileMovementComponent; }
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

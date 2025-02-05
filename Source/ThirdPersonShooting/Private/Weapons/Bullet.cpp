@@ -48,7 +48,6 @@ ABullet::ABullet()
 	
 }
 
-// Called when the game starts or when spawned
 void ABullet::BeginPlay()
 {
 	Super::BeginPlay();

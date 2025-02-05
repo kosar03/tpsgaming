@@ -119,12 +119,15 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunAttribute")
 	float FireSpeed = 4.f;
 
+	// 备用弹药数
 	UPROPERTY(EditDefaultsOnly)
 	int32 RemainingAmmoCount = 0;
 
+	// 弹匣弹药数
 	UPROPERTY(EditDefaultsOnly)
 	int32 FullAmmoCount = 30;
 
+	// 当前弹药数
 	UPROPERTY(VisibleAnywhere)
 	int32 AmmoCount = 30;
 
