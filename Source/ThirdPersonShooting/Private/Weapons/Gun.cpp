@@ -95,29 +95,18 @@ void AGun::GunShoot()
 	//
 	AShooterCharacter* OwnerCharacter = Cast<AShooterCharacter>(GetOwner());
 
-	FVector BulletStartLocation;
-	FVector BulletEndLocation;
-	FRotator BulletStartRotation;
+	FVector BulletStartLocation = FVector::ZeroVector;
+	FVector BulletEndLocation = FVector::ZeroVector;
+	FRotator BulletStartRotation = FRotator::ZeroRotator;
 	FHitResult HitResult;
 
 	if (OwnerController) { 
 		OwnerController->GetPlayerViewPoint(BulletStartLocation, BulletStartRotation); 
 		BulletEndLocation = BulletStartLocation + BulletStartRotation.Vector() * MaxRange;
-		// if (!(OwnerCharacter->IsAiming()))
-		// {
-		// }
 		BulletStartLocation = SkeletalMeshComponent->GetSocketLocation(TEXT("BulletEmitter"));
 	}
 
-	FCollisionQueryParams Params;
-	Params.AddIgnoredActor(this);
-	Params.AddIgnoredActor(GetOwner());
-	GetWorld()->LineTraceSingleByChannel(HitResult, BulletStartLocation, BulletEndLocation, ECollisionChannel::ECC_GameTraceChannel1, Params);
-	if (!HitResult.bBlockingHit) {
-		HitResult.ImpactPoint = BulletEndLocation;
-	}
-
-	FVector HitTarget = HitResult.ImpactPoint;
+	FVector HitTarget = BulletEndLocation;
 	FVector ToTarget = HitTarget - BulletStartLocation;
 	FRotator TargetRotation = ToTarget.Rotation();
 	if (BulletClass && OwnerCharacter)
@@ -133,24 +122,6 @@ void AGun::GunShoot()
 		}
 	}
 	
-	//
-
-	// FHitResult OutHit;
-	// FVector ShotPosition, ShotDirection;
-	// bool bHit = GunTrace(OutHit, ShotPosition, ShotDirection);
-	// if (bHit) 
-	// {
-	// 	// DrawDebugPoint(GetWorld(), OutHit.Location, 20.f, FColor::Red, true);
-	// 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, OutHit.Location, ShotDirection.Rotation());
-	// 	UGameplayStatics::PlaySoundAtLocation(GetWorld(), ImpactSound, OutHit.Location);
-
-	// 	AActor* HitActor = OutHit.GetActor();
-	// 	if (HitActor) {
-	// 		FPointDamageEvent PointDamageEvent(Damage, OutHit, ShotDirection, nullptr);
-	// 		HitActor->TakeDamage(Damage, PointDamageEvent, GetOwnerController(), this);
-	// 	}
-
-	// }
 }
 
 USphereComponent *AGun::GetCollisionSphereComponent() const

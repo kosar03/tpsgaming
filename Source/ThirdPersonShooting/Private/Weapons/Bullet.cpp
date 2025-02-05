@@ -11,6 +11,8 @@
 #include "Weapons/Gun.h"
 #include "Particles/ParticleSystemComponent.h"
 
+
+
 // Sets default values
 ABullet::ABullet()
 {
@@ -24,20 +26,20 @@ ABullet::ABullet()
 	BoxComponent->SetSimulatePhysics(true);
 	BoxComponent->SetCollisionObjectType(ECollisionChannel::ECC_GameTraceChannel1);
 	BoxComponent->SetUseCCD(true);
-	FBodyInstance* BodyInstance = BoxComponent->GetBodyInstance();
-	if (BodyInstance)
-	{
-		BodyInstance->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-		BodyInstance->SetUseCCD(true);
-	}
+	// FBodyInstance* BodyInstance = BoxComponent->GetBodyInstance();
+	// if (BodyInstance)
+	// {
+	// 	BodyInstance->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	// 	BodyInstance->SetUseCCD(true);
+	// }
 	SetRootComponent(BoxComponent);
 
 	BulletMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Bullet Mesh Component"));
 	BulletMeshComponent->SetupAttachment(BoxComponent);
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement Component"));
-	ProjectileMovementComponent->InitialSpeed = 5678.f;
-	ProjectileMovementComponent->MaxSpeed = 5678.f;
+	ProjectileMovementComponent->InitialSpeed = 80000.f;
+	ProjectileMovementComponent->MaxSpeed = 80000.f;
 	ProjectileMovementComponent->bSweepCollision = true;
 	ProjectileMovementComponent->bRotationFollowsVelocity = true;
 	ProjectileMovementComponent->bShouldBounce = true;
@@ -51,14 +53,34 @@ void ABullet::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	OnActorHit.AddDynamic(this, &ABullet::OnBulletHit);
+	// OnActorHit.AddDynamic(this, &ABullet::OnBulletHit);
 
 	if (TracerEffect)
 	{
 		TracerEffectComponent = UGameplayStatics::SpawnEmitterAttached(TracerEffect, BoxComponent, FName(), GetActorLocation(), GetActorRotation(), EAttachLocation::KeepWorldPosition);
 	}
 
+	PreLocation = CurrentLocation = GetActorLocation();
+	GetWorldTimerManager().SetTimer(HitDetectionTimerHandle, this, &ABullet::HitDetection, HitDetectionDelayTime, true);
 
+}
+
+void ABullet::HitDetection()
+{
+	CurrentLocation = GetActorLocation();
+
+	FHitResult HitResult;
+	FCollisionQueryParams Params;;
+	bool IsHit = GetWorld()->LineTraceSingleByChannel(HitResult, PreLocation, CurrentLocation, ECollisionChannel::ECC_GameTraceChannel1, Params);
+	if (IsHit)
+	{
+		OnBulletHit(this, HitResult.GetActor(), FVector::ZeroVector, HitResult);
+		GetWorldTimerManager().ClearTimer(HitDetectionTimerHandle);
+	}
+	else 
+	{
+		PreLocation = CurrentLocation;
+	}
 }
 
 // Called every frame
@@ -99,5 +121,7 @@ void ABullet::BulletDestroyDelay()
 
 void ABullet::BulletDestroy()
 {
+	GetWorldTimerManager().ClearTimer(DestroyTimerHandle);
+	
 	Destroy();
 }

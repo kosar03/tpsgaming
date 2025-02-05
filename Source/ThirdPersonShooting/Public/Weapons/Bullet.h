@@ -31,6 +31,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	void HitDetection();
+
 protected:	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	class UBoxComponent* BoxComponent;
@@ -55,7 +57,14 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	float DestroyDelayTime = 3.0f;
+	
+	UPROPERTY(EditDefaultsOnly)
+	float HitDetectionDelayTime = 0.05f;
+
+	FVector PreLocation;
+	FVector CurrentLocation;
 
 	FTimerHandle DestroyTimerHandle;
+	FTimerHandle HitDetectionTimerHandle;
 
 };
