@@ -60,6 +60,7 @@ public:
 	void LookRight(float AxisValue);
 
 	virtual void ShooterJump();
+	virtual void JumpEnd();
 	virtual bool CanShoot();
 	virtual void Shoot();
 	virtual void ShootEnd();
@@ -168,5 +169,9 @@ protected:
 	FTimerHandle ReloadingTimerHandle;
 
 private:
+
+	bool bCanJump = true;
+	float JumpDelay = 1.2f;
+	FTimerHandle JumpTimerHandle;
 
 };

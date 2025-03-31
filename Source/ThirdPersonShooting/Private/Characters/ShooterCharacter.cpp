@@ -14,6 +14,7 @@
 
 
 
+
 // Sets default values
 AShooterCharacter::AShooterCharacter()
 {
@@ -108,7 +109,17 @@ void AShooterCharacter::LookRight(float AxisValue)
 
 void AShooterCharacter::ShooterJump()
 {
-	Super::Jump();
+	if (bCanJump) {
+		Super::Jump();
+		bCanJump = false;
+		GetWorldTimerManager().SetTimer(JumpTimerHandle, this, &AShooterCharacter::JumpEnd, JumpDelay);
+	}
+}
+
+void AShooterCharacter::JumpEnd()
+{
+	bCanJump = true;
+	GetWorldTimerManager().ClearTimer(JumpTimerHandle);
 }
 
 bool AShooterCharacter::CanShoot()

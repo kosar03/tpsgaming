@@ -78,6 +78,7 @@ void ABullet::HitDetection()
 	}
 	else 
 	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("未击中！！！！"));
 		PreLocation = CurrentLocation;
 	}
 }
@@ -121,6 +122,6 @@ void ABullet::BulletDestroyDelay()
 void ABullet::BulletDestroy()
 {
 	GetWorldTimerManager().ClearTimer(DestroyTimerHandle);
-	
+
 	Destroy();
 }

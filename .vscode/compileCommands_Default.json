@@ -176,6 +176,22 @@
 		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
 	},
 	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\ObjectPool\\ObjectPoolComponent.cpp",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_Default\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\ObjectPool\\PoolActor.cpp",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_Default\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Private\\UIs\\EnemyHealthBarWidget.cpp",
 		"arguments": [
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
@@ -409,6 +425,22 @@
 	},
 	{
 		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\Legacies\\HealingDropBall.h",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_Default\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\ObjectPool\\ObjectPoolComponent.h",
+		"arguments": [
+			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_Default\\ThirdPersonShooting.1.rsp"
+		],
+		"directory": "E:\\Epic\\Unreal Engine\\UE_5.5\\Engine\\Source"
+	},
+	{
+		"file": "D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\Source\\ThirdPersonShooting\\Public\\ObjectPool\\PoolActor.h",
 		"arguments": [
 			"E:\\Program Tools\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\VS Code Projects\\C++\\Unreal Engine Projects\\ThirdPersonShooting\\.vscode\\compileCommands_Default\\ThirdPersonShooting.1.rsp"
