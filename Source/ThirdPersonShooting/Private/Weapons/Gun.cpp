@@ -92,7 +92,6 @@ void AGun::GunShoot()
 		}
 	}
 
-	//
 	AShooterCharacter* OwnerCharacter = Cast<AShooterCharacter>(GetOwner());
 
 	FVector BulletStartLocation = FVector::ZeroVector;
