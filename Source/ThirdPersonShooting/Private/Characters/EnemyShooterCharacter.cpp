@@ -108,7 +108,6 @@ void AEnemyShooterCharacter::BeginPlay()
     BasicGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, SocketName);
     BasicGun->SetOwner(this);
 
-    
     BasicGun->SetEquipped(EQUIPPED);
     HasGun = HASGUN;
     Aiming = AIMING;
