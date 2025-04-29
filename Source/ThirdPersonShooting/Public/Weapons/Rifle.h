@@ -20,7 +20,7 @@ public:
 
 	virtual void PullTrigger() override;
 	virtual void PullTriggerEnd() override;
-	virtual void CeaseFire() override;
+	virtual void UpdateShootingState() override;
 
 protected:
 

@@ -25,12 +25,12 @@ void AShotGun::PullTrigger()
     {
         if (OOwnerController->IsPlayerController()) 
         {
-            GetWorldTimerManager().SetTimer(PullTriggerTimerHandle, this, &AShotGun::CeaseFire, 1.0f);
+            GetWorldTimerManager().SetTimer(PullTriggerTimerHandle, this, &AShotGun::UpdateShootingState, 1.0f);
         }
     }
 }
 
-void AShotGun::CeaseFire()
+void AShotGun::UpdateShootingState()
 {
-    Super::CeaseFire();
+    Super::UpdateShootingState();
 }

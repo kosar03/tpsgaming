@@ -59,7 +59,7 @@ void AGun::PullTriggerEnd()
 
 }
 
-void AGun::CeaseFire()
+void AGun::UpdateShootingState()
 {
 	AShooterCharacter* OwnerCharacter = Cast<AShooterCharacter>(GetOwner());
     if (OwnerCharacter) 

@@ -24,7 +24,7 @@ public:
 
 	virtual void PullTrigger();
 	virtual void PullTriggerEnd();
-	virtual void CeaseFire();
+	virtual void UpdateShootingState();
 	virtual void GunShoot();
 
 

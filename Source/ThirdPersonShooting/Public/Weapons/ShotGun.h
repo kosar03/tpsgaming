@@ -18,6 +18,6 @@ public:
 	AShotGun();
 
 	virtual void PullTrigger() override;
-	virtual void CeaseFire() override;
+	virtual void UpdateShootingState() override;
 
 };

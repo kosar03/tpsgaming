@@ -51,6 +51,8 @@ void AKillEmAllGameMode::DecreaseEnemyCount()
 
 void AKillEmAllGameMode::BeginPlay()
 {
+    Super::BeginPlay();
+    
     int cnt = GetOriginEnemyCount();
     SetEnemyCount(cnt);
 }

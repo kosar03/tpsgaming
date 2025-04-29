@@ -27,13 +27,13 @@ void ALauncher::PullTrigger()
     {
         if (OOwnerController->IsPlayerController()) 
         {
-            GetWorldTimerManager().SetTimer(PullTriggerTimerHandle, this, &ALauncher::CeaseFire, 1.0f);
+            GetWorldTimerManager().SetTimer(PullTriggerTimerHandle, this, &ALauncher::UpdateShootingState, 1.0f);
         }
     }
 }
 
-void ALauncher::CeaseFire()
+void ALauncher::UpdateShootingState()
 {   
-    Super::CeaseFire();
+    Super::UpdateShootingState();
 
 }

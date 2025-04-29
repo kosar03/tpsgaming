@@ -28,7 +28,7 @@ void ARifle::PullTrigger()
         }
         else 
         {
-            GetWorldTimerManager().SetTimer(PullTriggerTimerHandle, this, &ARifle::CeaseFire, 0.2f);
+            GetWorldTimerManager().SetTimer(PullTriggerTimerHandle, this, &ARifle::UpdateShootingState, 0.2f);
         }
     }
 }
@@ -43,14 +43,14 @@ void ARifle::PullTriggerEnd()
         if (OOwnerController->IsPlayerController()) 
         {
             GetWorldTimerManager().ClearTimer(PullTriggerTimerHandle);
-            CeaseFire();
+            UpdateShootingState();
         }
     }
 }
 
-void ARifle::CeaseFire()
+void ARifle::UpdateShootingState()
 {
-    Super::CeaseFire();
+    Super::UpdateShootingState();
     
 }
 

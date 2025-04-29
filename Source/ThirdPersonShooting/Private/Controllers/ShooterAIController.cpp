@@ -31,6 +31,7 @@ void AShooterAIController::BeginPlay()
     
     if (AIBehaviorTree)
     {
+        // 运行行为树
         RunBehaviorTree(AIBehaviorTree);
 
         // 获取控制器所控制的Pawn的StartLocation。

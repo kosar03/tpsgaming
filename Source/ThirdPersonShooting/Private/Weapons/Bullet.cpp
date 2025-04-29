@@ -59,13 +59,16 @@ void ABullet::BeginPlay()
 		TracerEffectComponent = UGameplayStatics::SpawnEmitterAttached(TracerEffect, BoxComponent, FName(), GetActorLocation(), GetActorRotation(), EAttachLocation::KeepWorldPosition);
 	}
 
+	// 设置子弹初始位置
 	PreLocation = CurrentLocation = GetActorLocation();
+	// 设置定时器
 	GetWorldTimerManager().SetTimer(HitDetectionTimerHandle, this, &ABullet::HitDetection, HitDetectionDelayTime, true);
 
 }
 
 void ABullet::HitDetection()
 {
+	// 更新当前子弹位置
 	CurrentLocation = GetActorLocation();
 
 	FHitResult HitResult;
